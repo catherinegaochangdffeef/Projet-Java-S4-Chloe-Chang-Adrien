@@ -2,9 +2,7 @@ package application;
 
 import java.rmi.*;
 
-import modele.PenduInterface;
-import modele.PenduInterface;
-import modele.PenduInterface;
+import interfaceRMI.PenduInterface;
 
 public class Client {
 	public static void main(String[] args) {

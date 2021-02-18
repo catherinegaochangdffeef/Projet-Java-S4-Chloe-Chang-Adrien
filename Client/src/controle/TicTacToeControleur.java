@@ -1,8 +1,8 @@
 package controle;
 
-public class AccueilController {
+public class TicTacToeControleur {
 
-	public AccueilController() {
+	public TicTacToeControleur() {
 		// TODO Auto-generated constructor stub
 	}
 

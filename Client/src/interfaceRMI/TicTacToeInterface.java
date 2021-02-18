@@ -1,4 +1,4 @@
-package modele;
+package interfaceRMI;
 
 public class TicTacToeInterface {
 
