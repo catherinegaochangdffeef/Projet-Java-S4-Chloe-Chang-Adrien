@@ -1,8 +1,8 @@
 package modele;
 
-public class pendu {
+public class TicTacToe {
 
-	public pendu() {
+	public TicTacToe() {
 		// TODO Auto-generated constructor stub
 	}
 
