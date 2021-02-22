@@ -1,9 +1,8 @@
 package interfaceRMI;
 
-public class PenduInterface {
+import java.rmi.Remote;
 
-	public PenduInterface() {
-		// TODO Auto-generated constructor stub
-	}
-
+public interface PenduInterface extends Remote {
+	// liste des fonctions pour le jeu du pendu
+	public boolean RechCharactere(char c);
 }
