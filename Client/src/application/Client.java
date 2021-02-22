@@ -6,6 +6,8 @@ import interfaceRMI.PenduInterface;
 import interfaceRMI.AccueilInterface;
 import interfaceRMI.AllumettreInterface;
 import interfaceRMI.TicTacToeInterface;
+import vue.VueAccueil;
+import vue.VueAccueil;
 
 public class Client {
 
@@ -17,6 +19,7 @@ public class Client {
 			// service de nommage
 			AccueilInterface accueil = (AccueilInterface) Naming.lookup("rmi://" + hote + ":" + port + "/hello");
 			System.out.println("Client est pret !");
+			VueAccueil.main(args);
 		} catch (Exception e) {
 			System.out.println("Client exception: " + e);
 		}
