@@ -4,7 +4,7 @@ package application;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 
-import implementation.AccueilImpl;
+import modele.implementation.AccueilImpl;
 
 
 

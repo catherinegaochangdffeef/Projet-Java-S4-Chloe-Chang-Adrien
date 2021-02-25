@@ -1,4 +1,4 @@
-package interfaceRMI;
+package modele.interfaceRMI;
 
 public class AllumettreInterface {
 

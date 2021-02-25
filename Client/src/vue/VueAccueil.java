@@ -14,7 +14,7 @@ public class VueAccueil extends Application {
 	public void start(Stage primaryStage){
 		try {
 		
-			Parent root = FXMLLoader.load(getClass().getResource("/fxml/FenetreAccueil.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/vue/FenetreAccueil.fxml"));
 			Scene scene = new Scene((VBox) root, 600, 400);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("AccueilControleur");

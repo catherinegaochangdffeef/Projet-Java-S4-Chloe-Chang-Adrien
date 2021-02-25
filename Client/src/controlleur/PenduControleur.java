@@ -1,4 +1,4 @@
-package controle;
+package controlleur;
 
 public class PenduControleur {
 

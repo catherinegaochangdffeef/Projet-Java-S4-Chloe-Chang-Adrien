@@ -1,7 +1,8 @@
-package implementation;
+package modele.implementation;
 
 import java.rmi.RemoteException;
-import interfaceRMI.PenduInterface;
+
+import modele.interfaceRMI.PenduInterface;
 
 public class Pendu implements PenduInterface {
     public static int NB_ERREURS_MAX=10;

@@ -2,10 +2,10 @@ package application;
 
 import java.rmi.*;
 
-import interfaceRMI.PenduInterface;
-import interfaceRMI.AccueilInterface;
-import interfaceRMI.AllumettreInterface;
-import interfaceRMI.TicTacToeInterface;
+import modele.interfaceRMI.AccueilInterface;
+import modele.interfaceRMI.AllumettreInterface;
+import modele.interfaceRMI.PenduInterface;
+import modele.interfaceRMI.TicTacToeInterface;
 import vue.VueAccueil;
 import vue.VueAccueil;
 

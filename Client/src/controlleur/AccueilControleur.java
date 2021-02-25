@@ -1,4 +1,4 @@
-package controle;
+package controlleur;
 
 import java.net.URL;
 import java.util.ArrayList;
