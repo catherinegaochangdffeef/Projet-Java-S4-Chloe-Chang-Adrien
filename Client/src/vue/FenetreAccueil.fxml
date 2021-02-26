@@ -23,6 +23,6 @@
             <Button fx:id="ButtonTicTacToe" mnemonicParsing="false" onAction="#VersTicTacToe" text="Tic Tac Toe" />
          </children>
       </HBox>
-      <Button fx:id="BoutonQuitter" mnemonicParsing="false" onAction="#Quitter" prefHeight="26.0" prefWidth="120.0" text="Quitter" textAlignment="CENTER" />
+      <Button fx:id="ButtonQuitter" mnemonicParsing="false" onAction="#Quitter" prefHeight="26.0" prefWidth="120.0" text="Quitter" textAlignment="CENTER" />
    </children>
 </VBox>
