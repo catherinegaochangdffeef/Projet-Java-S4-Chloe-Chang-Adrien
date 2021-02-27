@@ -3,10 +3,6 @@ package application;
 import java.rmi.*;
 
 import modele.interfaceRMI.AccueilInterface;
-import modele.interfaceRMI.AllumettreInterface;
-import modele.interfaceRMI.PenduInterface;
-import modele.interfaceRMI.TicTacToeInterface;
-import vue.VueAccueil;
 import vue.VueAccueil;
 
 public class Client {
@@ -20,6 +16,7 @@ public class Client {
 			AccueilInterface accueil = (AccueilInterface) Naming.lookup("rmi://" + hote + ":" + port + "/hello");
 			System.out.println("Client est pret !");
 			VueAccueil.main(args);
+			
 		} catch (Exception e) {
 			System.out.println("Client exception: " + e);
 		}

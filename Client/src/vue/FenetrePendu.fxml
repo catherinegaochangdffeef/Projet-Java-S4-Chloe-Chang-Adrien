@@ -7,38 +7,43 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pendugame">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.PenduControleur">
    <children>
       <Label layoutX="14.0" layoutY="43.0" text="PENDU">
          <font>
             <Font name="Copperplate Gothic Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="83.0" text="Vies restantes :" underline="true">
+      <Label fx:id="lbl_vies" layoutX="14.0" layoutY="83.0" text="Vies restantes :" underline="true" visible="false">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="vies_restantes" layoutX="111.0" layoutY="84.0" text="10" />
-      <Label fx:id="motcache" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="176.0" text="- - - - - -">
+      <Label fx:id="vies_restantes" layoutX="111.0" layoutY="84.0" text="10" visible="false" />
+      <Label fx:id="motcache" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="176.0" text="- - - - - -" visible="false">
          <font>
             <Font name="Comic Sans MS" size="51.0" />
          </font>
       </Label>
-      <Label layoutX="135.0" layoutY="283.0" text="Entrez une lettre : ">
+      <Label fx:id="lbl_saisie" layoutX="135.0" layoutY="283.0" text="Entrez une lettre : " visible="false">
          <font>
             <Font name="Copperplate Gothic Light" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="saisieLettre" layoutX="319.0" layoutY="280.0" />
+      <TextField fx:id="saisieLettre" layoutX="319.0" layoutY="280.0" visible="false" />
       <Button fx:id="btn_quitter" cancelButton="true" layoutX="579.0" layoutY="464.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter le jeu" textAlignment="CENTER">
          <font>
             <Font name="Copperplate Gothic Light" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btn_valid" layoutX="488.0" layoutY="280.0" mnemonicParsing="false" onAction="#Envoie_Lettre" text="Valider">
+      <Button fx:id="btn_valid" layoutX="488.0" layoutY="280.0" mnemonicParsing="false" onAction="#Envoie_Lettre" text="Valider" visible="false">
          <font>
             <Font name="Copperplate Gothic Light" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="commencer" defaultButton="true" layoutX="240.0" layoutY="226.0" mnemonicParsing="false" onAction="#DebutJeu" text="Commencer">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="27.0" />
          </font>
       </Button>
    </children>
