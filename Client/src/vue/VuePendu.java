@@ -12,7 +12,7 @@ public class VuePendu  extends Application{
 	@Override
 	public void start(Stage primaryStage){
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/fxml/FenetrePendu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/vue/FenetrePendu.fxml"));
 			Scene scene = new Scene((VBox) root, 600,400);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Pendu");
