@@ -45,6 +45,7 @@ public class AccueilControleur  {
 	
 	public void VersTicTacToe() {
 		new VueTicTacToe().start(new Stage());
+		new VueTicTacToe().start(new Stage());
 		this.Quitter();
 	}
 

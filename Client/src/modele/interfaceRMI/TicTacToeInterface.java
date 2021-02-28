@@ -1,9 +1,7 @@
 package modele.interfaceRMI;
 
-public class TicTacToeInterface {
+import java.rmi.Remote;
 
-	public TicTacToeInterface() {
-		// TODO Auto-generated constructor stub
-	}
-
+public interface TicTacToeInterface  extends Remote{
+	// liste des fonctions pour le jeu du Tic-Tac-Toe (ou morpion en français)
 }
