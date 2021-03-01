@@ -2,6 +2,7 @@ package modele.interfaceRMI;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.UUID;
 
 public interface PenduInterface extends Remote {
 	// liste des fonctions pour le jeu du pendu
@@ -15,5 +16,6 @@ public interface PenduInterface extends Remote {
 	// affiche une lettre dans le mot à trouver
 	public String AfficheLettres(char c) throws RemoteException;
 	// retire un point lors d'une erreur de lettres
-	public int ErreurLettre(int nbErreur) throws RemoteException;
+	public int ErreurLettre() throws RemoteException;
+	public UUID creerPartie() throws RemoteException;
 }
