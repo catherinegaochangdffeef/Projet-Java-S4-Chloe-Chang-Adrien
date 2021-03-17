@@ -12,8 +12,8 @@ public class VueAllumettes extends Application {
 	@Override
 	public void start(Stage primaryStage){
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/fxml/FenetreAllumettes.fxml"));
-			Scene scene = new Scene((VBox) root, 600,400);		
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("vue/FenetreAllumettes.fxml"));
+			Scene scene = new Scene((VBox) root, 700,500);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Allumettes");
 			primaryStage.show();
