@@ -33,7 +33,8 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public boolean RechCharactere(char c) {
-		// on renvoie vrai si la lettre est trouvée, sinon faux		return  (mot.indexOf(c) != -1);
+		// on renvoie vrai si la lettre est trouvée, sinon faux
+		return  (mot.indexOf(c) != -1);
 	}
 
 	@Override

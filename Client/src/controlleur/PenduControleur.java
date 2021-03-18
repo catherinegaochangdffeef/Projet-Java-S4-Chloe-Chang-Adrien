@@ -69,30 +69,45 @@ public class PenduControleur implements Initializable {
 		saisieLettre.setVisible(true);
 		lbl_lettres_saisies.setVisible(true);
 		lbl_lettres_jouees.setVisible(true);
-		lbl_erreur_lettre.setVisible(false);
+		lbl_erreur_lettre.setVisible(true);
 
 	}
 	public void Envoie_Lettre() throws RemoteException {
-		char c = saisieLettre.getText().trim().toUpperCase().charAt(0);
-		if (Pattern.matches("[A-Z]{1}", saisieLettre.getText().trim().toUpperCase())) {
+		char c = 0;
+		try {
+			c = saisieLettre.getText().trim().toUpperCase().charAt(0);
+		}catch(Exception e) {
+			System.out.println("erreur saisie" + e);
+		}
+		// le regex pour autoriser une seule lettre est  [A-Z]{1,1}
+		if (Pattern.matches("[A-Z]{1,1}", saisieLettre.getText().trim().toUpperCase())) {
+			if (LettreUtilisee(c) == false) {
+				if (pendu.RechCharactere(c) == true) {
+					motcache.setText(pendu.AfficheLettres(c));
+					lbl_erreur_lettre.setText("");
+					lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
+				}
+				else {
+					vies_restantes.setText(String.valueOf(pendu.ErreurLettre()));
+					lbl_erreur_lettre.setText("");
+					lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
+				}
+			}
 			
-			if (pendu.RechCharactere(c) == true) {
-				motcache.setText(pendu.AfficheLettres(c));
-				lbl_erreur_lettre.setText("");
-				lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
-			}
-			else {
-				vies_restantes.setText(String.valueOf(pendu.ErreurLettre()));
-				lbl_erreur_lettre.setText("");
-				lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
-			}
+			else 
+				lbl_erreur_lettre.setText("La lettre a déjà été utilisée !");
 		}
 		else {
-			lbl_erreur_lettre.setText("Une seule lettre est attendue");
+			lbl_erreur_lettre.setText("Une seule lettre est attendue !");
 		}
 		saisieLettre.setText("");
 	}
-	
+	public boolean LettreUtilisee (char c) {
+		// retourne -1 si le charactere est pas contenu
+		if (lbl_lettres_jouees.getText().indexOf(c) == -1)
+			return false;
+		else return true;
+	}
 	public void Quitter () {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
 		stage.close();
