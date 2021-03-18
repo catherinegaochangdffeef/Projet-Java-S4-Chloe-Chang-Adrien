@@ -15,6 +15,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	String[] dico = new String[]{"complexe","analyse","depiter","cuillere","interface",};
 	String mot;
 	String motcache;
+	char alphabet[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
 	// constructeur
 	public Pendu() throws RemoteException {
@@ -32,9 +33,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public boolean RechCharactere(char c) {
-		// on renvoie vrai si la lettre est trouvée, sinon faux
-		System.out.println(mot.indexOf(c) != -1);
-		return  (mot.indexOf(c) != -1);
+		// on renvoie vrai si la lettre est trouvée, sinon faux		return  (mot.indexOf(c) != -1);
 	}
 
 	@Override
