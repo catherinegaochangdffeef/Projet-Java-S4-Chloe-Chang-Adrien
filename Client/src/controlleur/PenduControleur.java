@@ -58,7 +58,7 @@ public class PenduControleur implements Initializable {
 		}
 	}
 	public void DebutJeu() throws RemoteException {
-		mot = pendu.ChoixMot();
+		mot = pendu.ChoixMot(numPartie);
 		motcache.setText(pendu.AfficheTirets(mot));
 		commencer.setVisible(false);
 		btn_valid.setVisible(true);
@@ -82,15 +82,17 @@ public class PenduControleur implements Initializable {
 		// le regex pour autoriser une seule lettre est  [A-Z]{1,1}
 		if (Pattern.matches("[A-Z]{1,1}", saisieLettre.getText().trim().toUpperCase())) {
 			if (LettreUtilisee(c) == false) {
-				if (pendu.RechCharactere(c) == true) {
-					motcache.setText(pendu.AfficheLettres(c));
+				if (pendu.RechCharactere(c,mot) == true) {
+					motcache.setText(pendu.AfficheLettres(c,numPartie));
 					lbl_erreur_lettre.setText("");
 					lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
+					Finjeu(Integer.valueOf(vies_restantes.getText()));
 				}
 				else {
-					vies_restantes.setText(String.valueOf(pendu.ErreurLettre()));
+					vies_restantes.setText(String.valueOf(pendu.ErreurLettre(numPartie)));
 					lbl_erreur_lettre.setText("");
 					lbl_lettres_jouees.setText(lbl_lettres_jouees.getText() + " " + c);
+					Finjeu(Integer.valueOf(vies_restantes.getText()));
 				}
 			}
 			
@@ -102,6 +104,17 @@ public class PenduControleur implements Initializable {
 		}
 		saisieLettre.setText("");
 	}
+	private void Finjeu(int erreur) {
+		if (motcache.getText().indexOf('_') == -1) {
+			btn_valid.setDisable(true);// on a gagné
+			saisieLettre.setDisable(true);
+		}
+		else if (erreur <= 0) {
+			btn_valid.setDisable(true);// on a perdu
+			saisieLettre.setDisable(true);
+		}
+	}
+	
 	public boolean LettreUtilisee (char c) {
 		// retourne -1 si le charactere est pas contenu
 		if (lbl_lettres_jouees.getText().indexOf(c) == -1)
@@ -112,9 +125,5 @@ public class PenduControleur implements Initializable {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
 		stage.close();
 		new Client().start(new Stage());
-	}
-	public void setInterface(PenduInterface controller1) {
-		this.penduInterface = controller1;
-		System.out.println("valeur penduInterface lors du set Interface : " + this.penduInterface);
 	}
 }

@@ -29,7 +29,7 @@
             <Font name="Copperplate Gothic Light" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="saisieLettre" layoutX="319.0" layoutY="280.0" visible="false" />
+      <TextField fx:id="saisieLettre" layoutX="319.0" layoutY="280.0" onAction="#Envoie_Lettre" visible="false" />
       <Button fx:id="btn_quitter" cancelButton="true" layoutX="579.0" layoutY="464.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter le jeu" textAlignment="CENTER">
          <font>
             <Font name="Copperplate Gothic Light" size="12.0" />
