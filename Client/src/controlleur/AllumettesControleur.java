@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import application.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +35,7 @@ public class AllumettesControleur {
 	@FXML private ImageView allumette15;
 	
 	@FXML
-	private Button btnTest, btnUn, btnDeux, btnQuitter;
+	private Button btnTest, btnUn, btnDeux, btnRejouer, btnQuitter;
 
 	@FXML
 	private Label lblScore, lblResultat;
@@ -46,6 +47,7 @@ public class AllumettesControleur {
 	int max = 2;
 	int min = 1;
 	int range = max - min +1;
+	int tour;
 
 	AllumetteInterface allu; // cette variable permettre d'utiliser les fonctions implementees du cote serveur
 	int idAllumette; // variable qui récupère l'id des parties du jeu des allumettes
@@ -76,8 +78,8 @@ public class AllumettesControleur {
 		listAllumettes.add(allumette13);
 		listAllumettes.add(allumette14);
 		listAllumettes.add(allumette15);
-		
-		int tour = (int) (Math.random()*range) +min;
+		btnRejouer.setVisible(false);
+		tour = (int) (Math.random()*range)+min;
 		// generation aleatoire d'un nombre qui determine quel joueur commence
 		if (tour == 1) { // si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur realise une action
 			tourIA();
@@ -156,7 +158,7 @@ public class AllumettesControleur {
 			}
 			// sinon il en prend aleatoirement 1 ou 2
 			else { 
-				int nbARetirer = (int) (Math.random()*range) +min;
+				int nbARetirer = (int) (Math.random()*range)+min;
 				if (nbARetirer == 1) {
 					allu.retirerAllumettes(1, idAllumette);
 					nbAllumettesIA += 1;
@@ -192,6 +194,7 @@ public class AllumettesControleur {
 	private void finPartie() {
 		btnUn.setVisible(false);
 		btnDeux.setVisible(false);
+		btnRejouer.setVisible(true);
 		if (nbAllumettesJoueur %2 == 0) {
 			lblResultat.setText("L'ordinateur a gagné avec un score de " + nbAllumettesIA + " allumettes.");
 		}
@@ -199,10 +202,34 @@ public class AllumettesControleur {
 			lblResultat.setText("Vous avez gagné avec un score de " + nbAllumettesJoueur + " allumettes.");
 		}
 	}
-
-	// fonction qui permet de quitter la fenetre de jeu
-	public void Quitter() {
-		Stage stage=(Stage) btnQuitter.getScene().getWindow();
-		stage.close();
+	
+	// fonction qui permet au joueur de rejouer une partie
+	public void Rejouer() {
+		try {
+			idAllumette = allu.newAllumette();
+			afficherAllumettes();
+			nbAllumettesJoueur = 0;
+			nbAllumettesIA = 0;
+			lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
+			lblResultat.setText("");
+			btnUn.setVisible(true);
+			btnDeux.setVisible(true);
+			btnRejouer.setVisible(false);
+			tour = (int) (Math.random()*range)+min;
+			// generation aleatoire d'un nombre qui determine quel joueur commence
+			if (tour == 1) { // si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur realise une action
+				tourIA();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	// fonction qui permet de quitter la fenetre de jeu et de revenir sur la fenetre d'accueil
+	public void Quitter() {
+        Stage stage=(Stage) btnQuitter.getScene().getWindow();
+        stage.close();
+        new Client().start(new Stage());
+    }
 }

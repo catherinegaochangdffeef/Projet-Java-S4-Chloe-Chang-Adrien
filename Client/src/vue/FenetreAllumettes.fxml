@@ -171,9 +171,14 @@
                   <Insets left="25.0" />
                </HBox.margin>
             </Button>
+            <Button fx:id="btnRejouer" mnemonicParsing="false" onAction="#Rejouer" text="Rejouer">
+               <HBox.margin>
+                  <Insets left="125.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="btnQuitter" mnemonicParsing="false" onAction="#Quitter" text="Quitter">
                <HBox.margin>
-                  <Insets left="200.0" right="50.0" />
+                  <Insets left="25.0" right="50.0" />
                </HBox.margin>
             </Button>
          </children>
