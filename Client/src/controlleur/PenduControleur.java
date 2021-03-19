@@ -44,20 +44,19 @@ public class PenduControleur implements Initializable {
 	@FXML
 	private Button commencer;
 
-	private PenduInterface penduInterface;
-
 	public void initialize(URL location, ResourceBundle ressources) {
 		try {
 			String hote = "127.0.0.1";
 			int port = Integer.parseInt("6002");
 			pendu = (PenduInterface) Naming.lookup("rmi://" + hote + ":" + port + "/pendu");
-			numPartie = pendu.creerPartie();
 		}
 		catch (Exception e) {
 			System.out.println("Erreur lookup" + e);
 		}
 	}
+	
 	public void DebutJeu() throws RemoteException {
+		numPartie = pendu.creerPartie();
 		mot = pendu.ChoixMot(numPartie);
 		motcache.setText(pendu.AfficheTirets(mot));
 		commencer.setVisible(false);
@@ -70,6 +69,13 @@ public class PenduControleur implements Initializable {
 		lbl_lettres_saisies.setVisible(true);
 		lbl_lettres_jouees.setVisible(true);
 		lbl_erreur_lettre.setVisible(true);
+		
+		btn_valid.setDisable(false);
+		saisieLettre.setDisable(false);
+		
+		vies_restantes.setText(String.valueOf(10));
+		lbl_lettres_jouees.setText("");
+		
 
 	}
 	public void Envoie_Lettre() throws RemoteException {
@@ -106,15 +112,29 @@ public class PenduControleur implements Initializable {
 	}
 	private void Finjeu(int erreur) {
 		if (motcache.getText().indexOf('_') == -1) {
-			btn_valid.setDisable(true);// on a gagné
-			saisieLettre.setDisable(true);
+			// on a gagné
+			CommunFinJeu();
+			lbl_lettres_jouees.setText("Bravo ! Vous avez gagné avec " + String.valueOf(10-erreur) + " erreurs !");
 		}
 		else if (erreur <= 0) {
-			btn_valid.setDisable(true);// on a perdu
-			saisieLettre.setDisable(true);
+			// on a perdu
+			CommunFinJeu();
+			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver était : " + mot);
 		}
 	}
 	
+	private void CommunFinJeu() {
+		lbl_lettres_saisies.setVisible(false);
+		saisieLettre.setDisable(true);
+		btn_valid.setDisable(true);
+		commencer.setVisible(true);
+		saisieLettre.setVisible(false);
+		lbl_saisie.setVisible(false);
+		btn_valid.setVisible(false);
+		commencer.setText("Recommencer");
+		
+	}
+
 	public boolean LettreUtilisee (char c) {
 		// retourne -1 si le charactere est pas contenu
 		if (lbl_lettres_jouees.getText().indexOf(c) == -1)
