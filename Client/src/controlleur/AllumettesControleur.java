@@ -50,7 +50,7 @@ public class AllumettesControleur {
 	int tour;
 
 	AllumetteInterface allu; // cette variable permettre d'utiliser les fonctions implementees du cote serveur
-	int idAllumette; // variable qui récupère l'id des parties du jeu des allumettes
+	int idAllumette; // variable qui rÃ©cupÃ¨re l'id des parties du jeu des allumettes
 
 	public void initialize() {
 		try {
@@ -84,7 +84,6 @@ public class AllumettesControleur {
 		if (tour == 1) { // si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur realise une action
 			tourIA();
 		}
-		System.out.println(idAllumette);
 	}
 
 	// fonction qui gere l'affichage des allumettes au fil du jeu
@@ -102,7 +101,7 @@ public class AllumettesControleur {
 		}
 	}
 
-	// fonction qui gère le retrait d'1 allumette par le client 
+	// fonction qui gÃ¨re le retrait d'1 allumette par le client 
 	public void retirerUn() { 
 		try {
 			allu.retirerAllumettes(1, idAllumette);
@@ -113,7 +112,7 @@ public class AllumettesControleur {
 			if (allu.getNbAllumettes(idAllumette) == 0) {
 				finPartie();
 			}
-			// sinon c'est à l'ordinateur de jouer
+			// sinon c'est Ã  l'ordinateur de jouer
 			else {
 				tourIA();
 			}
@@ -134,7 +133,7 @@ public class AllumettesControleur {
 			if (allu.getNbAllumettes(idAllumette) == 0) {
 				finPartie();
 			}
-			// sinon c'est à l'ordinateur de jouer
+			// sinon c'est Ã  l'ordinateur de jouer
 			else {
 				tourIA();
 			}
@@ -190,16 +189,16 @@ public class AllumettesControleur {
 		}
 	}
 
-	// fonction qui gère la fin de la partie, celui qui a un nombre impair d'allumettes gagne
+	// fonction qui gÃ¨re la fin de la partie, celui qui a un nombre impair d'allumettes gagne
 	private void finPartie() {
 		btnUn.setVisible(false);
 		btnDeux.setVisible(false);
 		btnRejouer.setVisible(true);
 		if (nbAllumettesJoueur %2 == 0) {
-			lblResultat.setText("L'ordinateur a gagné avec un score de " + nbAllumettesIA + " allumettes.");
+			lblResultat.setText("L'ordinateur a gagnÃ© avec un score de " + nbAllumettesIA + " allumettes.");
 		}
 		else {
-			lblResultat.setText("Vous avez gagné avec un score de " + nbAllumettesJoueur + " allumettes.");
+			lblResultat.setText("Vous avez gagnÃ© avec un score de " + nbAllumettesJoueur + " allumettes.");
 		}
 	}
 	
