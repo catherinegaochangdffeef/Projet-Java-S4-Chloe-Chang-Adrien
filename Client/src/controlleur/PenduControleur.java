@@ -113,7 +113,7 @@ public class PenduControleur implements Initializable {
 						Finjeu(Integer.valueOf(vies_restantes.getText()));
 					}
 				}
-				else lbl_erreur_lettre.setText("La lettre a déjà été utilisée !");
+				else lbl_erreur_lettre.setText("La lettre a dÃ©jÃ  Ã©tÃ© utilisÃ©e !");
 			}
 			else lbl_erreur_lettre.setText("Une seule lettre est attendue !");
 		} catch(Exception e) {
@@ -185,14 +185,14 @@ public class PenduControleur implements Initializable {
 
 	private void Finjeu(int erreur) {
 		if (motcache.getText().indexOf('_') == -1) {
-			// on a gagné
+			// on a gagnÃ©
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Bravo ! Vous avez gagné avec " + String.valueOf(10-erreur) + " erreurs !");
+			lbl_lettres_jouees.setText("Bravo ! Vous avez gagnÃ© avec " + String.valueOf(11-erreur) + " erreurs !");
 		}
 		else if (erreur <= 0) {
 			// on a perdu
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver était : " + mot);
+			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver Ã©tait : " + mot);
 		}
 	}
 
