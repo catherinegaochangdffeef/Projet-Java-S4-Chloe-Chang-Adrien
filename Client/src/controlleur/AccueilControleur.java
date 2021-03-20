@@ -42,7 +42,6 @@ public class AccueilControleur implements AccueilInterface  {
 
 	public void VersTicTacToe() {
 		new VueTicTacToe().start(new Stage());
-		new VueTicTacToe().start(new Stage());
 		this.Quitter();
 	}
 

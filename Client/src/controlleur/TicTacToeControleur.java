@@ -1,5 +1,7 @@
 package controlleur;
 
+import java.rmi.Naming;
+
 import controlleur.TicTacToeControleur;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import modele.interfaceRMI.AllumetteInterface;
+import modele.interfaceRMI.TicTacToeInterface;
+import vue.VueTicTacToe;
 import javafx.scene.image.Image;
 
 public class TicTacToeControleur {
@@ -18,6 +23,9 @@ public class TicTacToeControleur {
 	private boolean tour = true;
 	private boolean signe = false; // X - true, O - false
 	private boolean fin = false;
+	TicTacToeInterface tic;// cette variable permettre d'utiliser les fonctions implementees du cote serveur
+	
+	
 	@FXML
     private GridPane gridPane;
 	@FXML
@@ -50,17 +58,35 @@ public class TicTacToeControleur {
 	
 	 public void initialize(){
 		 try {
-			
+			 //vider tous les case 
+			    img9.setImage(null);
+				img8.setImage(null);
+				img7.setImage(null);
+				img5.setImage(null);
+				img6.setImage(null);
+				img4.setImage(null);
+				img3.setImage(null);
+				img2.setImage(null);
+				img1.setImage(null);
+				fin =false;
+				tour_lb.setText(null);
+				signe_lb.setText(null);
+			 
+			 String hote = "127.0.0.1";
+				int port = Integer.parseInt("6002");
+				tic = (TicTacToeInterface) Naming.lookup("rmi://" + hote + ":" + port + "/tictactoe");
 			imageO = new Image(TicTacToeControleur.class.getResource("/vue/O.png").toString());
 	        imageX = new Image(TicTacToeControleur.class.getResource("/vue/X.png").toString());
 	        btn_rec.setVisible(false);
-	        if(signe) signe_lb.setText("X");
+	        if (signe) signe_lb.setText("X");
 	        else signe_lb.setText("O");
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
+				System.out.println("Erreur lookup" + e);
 			}
 	        
 	    } 
+	 
 	public void imageClique(MouseEvent event) {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
@@ -71,6 +97,8 @@ public class TicTacToeControleur {
 				endTour();
 				tour=!tour;
 				signe=!signe;
+				if (signe) signe_lb.setText("O");
+		        else signe_lb.setText("X");
 			}	
 		}
 		
@@ -164,4 +192,10 @@ public void Quitter() {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
 		stage.close();
 	}
+public void Redemarrer() {
+	
+	
+	initialize();
+	
+}
 }
