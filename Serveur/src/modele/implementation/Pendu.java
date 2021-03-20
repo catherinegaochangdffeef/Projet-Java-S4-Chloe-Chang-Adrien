@@ -11,11 +11,11 @@ import modele.interfaceRMI.PenduInterface;
 public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	// liste des mots du pendu
 	String[] dico = new String[]{"complexe","analyse","depiter","cuillere","nuage",
 			"analphabete","granite","rhyolite","gabbro","subduction","gaz","lait",""
-					+ "table","algorithme","biscuit","parfum","volcan","arbre","séquoia","film",
+					+ "table","algorithme","biscuit","parfum","volcan","arbre","sequoia","film",
 					"australopitheque","tyranosaure","spinosaurus","licorne","archeopteryx","ornythorinque",
 					"globuline","appartenir","mot","boeuf","heritage","personne","constructeur","interface",
 					"trop","subliminal","vingt","note","gentil"};
@@ -23,12 +23,12 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	int nb_erreur;
 	String mot;
 	String motcache;
-	
+
 	// constructeurs
 	public Pendu() throws RemoteException {
 		super();
 	}
-	
+
 	public Pendu(String mot, String motcache, int i) throws RemoteException {
 		super();
 		this.mot = mot;
@@ -41,7 +41,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 		UUID id = UUID.randomUUID();
 		int index = new Random().nextInt(dico.length);
 		String mot = dico[index].toUpperCase();
-		tableauPendu.put(id, new Pendu(mot, AfficheTirets(mot), 10));
+		tableauPendu.put(id, new Pendu(mot, AfficheTirets(mot), 11));
 		return id;
 	}
 
@@ -53,7 +53,6 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public String ChoixMot(UUID id) {
-		System.out.println(tableauPendu.get(id));
 		Pendu bob = tableauPendu.get(id);
 		return bob.getMot();
 	}
@@ -67,22 +66,29 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 		Pendu bob = tableauPendu.get(id);
 		mot = bob.getMot();
 		motcache = bob.getMotcache();
+
 		for (int position = 0; position < mot.length(); position++) { 
 			if (mot.charAt(position) == c) { 
-
+				// on retire tout les espaces pour faire correspond mot et motcaché (mot caché ya des espaces en plus)
 				motcache = motcache.replaceAll("_ ", "_"); 
-				String word2; 
-				word2 = motcache.substring(0, position) 
-						+ c 
-						+ motcache.substring(position 
-								+ 1); 
-				word2 = word2.replaceAll("_", "_ "); 
-				motcache = word2; 
+				String mot2; 				// on prend tout ce qui est avant le mot trouvé, on affiche la lettre et on affiche tout ce qui vient après + 1
+				mot2 = motcache.substring(0, position) + c + motcache.substring(position + 1); 
+				// on remplace les _ par des "_ " pour rajouter des espaces
+				mot2 = mot2.replaceAll("_", "_ ");
+				motcache = mot2; 
 			} 
 		} 
-		System.out.println(motcache);
+
 		bob.setMotcache(motcache);
 		return motcache;
+	}
+	public char[] ecritLettres(String mot, char c) throws RemoteException {
+		char[] motDecompose = mot.toCharArray(); 
+		for (int i=0; i<mot.length(); i++) {
+			if (c == mot.charAt(i)) motDecompose[i] = c; 
+			else motDecompose[i] = '_'; 
+		}
+		return motDecompose; 
 	}
 
 	@Override
