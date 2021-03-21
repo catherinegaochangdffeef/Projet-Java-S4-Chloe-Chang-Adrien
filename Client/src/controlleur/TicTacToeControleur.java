@@ -1,7 +1,9 @@
 package controlleur;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 
+import application.Client;
 import controlleur.TicTacToeControleur;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import modele.interfaceRMI.AllumetteInterface;
 import modele.interfaceRMI.TicTacToeInterface;
 import vue.VueTicTacToe;
 import javafx.scene.image.Image;
@@ -58,7 +59,7 @@ public class TicTacToeControleur {
 	
 	 public void initialize(){
 		 try {
-			 //vider tous les case 
+			 //vider toutes les case 
 			    img9.setImage(null);
 				img8.setImage(null);
 				img7.setImage(null);
@@ -75,7 +76,7 @@ public class TicTacToeControleur {
 				tour_lb.setText("c'est le tour de: ");
 			 
 			 String hote = "127.0.0.1";
-				int port = Integer.parseInt("6002");
+				int port = Integer.parseInt("6003");
 				tic = (TicTacToeInterface) Naming.lookup("rmi://" + hote + ":" + port + "/tictactoe");
 			imageO = new Image(TicTacToeControleur.class.getResource("/vue/O.png").toString());
 	        imageX = new Image(TicTacToeControleur.class.getResource("/vue/X.png").toString());
@@ -88,15 +89,15 @@ public class TicTacToeControleur {
 	        
 	    } 
 	
-	public void imageClique(MouseEvent event) {
+	public void imageClique(MouseEvent event) throws RemoteException {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
-		if(!fin) {
+		if(!this.tic.finMorpion()) {
 			if(temp == null) {
 				if(tour) img.setImage(imageX);
 				else img.setImage(imageO);
 				endTour();
-				if(!fin) {
+				if(!this.tic.finMorpion()) {
 				tour=!tour;
 				signe=!signe;
 				if (signe) signe_lb.setText("X");
@@ -107,7 +108,6 @@ public class TicTacToeControleur {
 		}
 		
 	}
-	
 	public boolean isTour() {
 		return tour;
 	}
@@ -117,7 +117,7 @@ public class TicTacToeControleur {
 	public boolean isSigne() {
 		return signe;
 	}
-	public void endTour() {
+	public void endTour() throws RemoteException {
 		tour_lb.setText("c'est le tour de: ");
 		++tourCompteur;
 		if(tourCompteur >=5) {
@@ -127,19 +127,20 @@ public class TicTacToeControleur {
 			}
 			
 		}
-		
-		
 	}
 	public void startTour() {
 		tour_lb.setText("C'est le tour de : ");
 		
 	}
 	//fonction qui permets de affihcer la gagnant et permet de recommencer le jeu 
-	public void finJeu(int gagnant) {
+	public void finJeu(int gagnant) throws RemoteException  {
 		String gagne = "Le gagnant est: ";
-		if(gagnant == 0) signe_lb.setText("O");
-		else signe_lb.setText("X");
-		fin =true;
+		//int i=tic.finJeu(gagnant);
+		//if( gagnant ==0) signe_lb.setText("O");
+		//else signe_lb.setText("X");
+		signe_lb.setText(this.tic.finJeu(gagnant));
+		//fin=tic.retournerFinJeu();
+		fin = true;
 		tour_lb.setText(gagne);
 		btn_rec.setVisible(true);
 		
@@ -147,42 +148,43 @@ public class TicTacToeControleur {
 	// -1 pas de gagnant
 	// 0 - O gagne
 	// 1 - X gagne
-	public int verifierGagnant() {
+	public int verifierGagnant() throws RemoteException {
 		// premier horizontal
-		int gagnant = verifierColonne(img1,img2,img3);
+		int gagnant = this.tic.verifierColonne(img1,img2,img3);
 		
 		// deuxieme horizontal
 		if(gagnant<0) {
-			gagnant = verifierColonne(img4,img5,img6);
+			gagnant = this.tic.verifierColonne(img4,img5,img6);
 			
 		}
 		//troisieme horizontal
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img7,img8,img9);
+			gagnant =this.tic. verifierColonne(img7,img8,img9);
 		}
 		
 		// premiere verticale
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img1,img4,img7);
+			gagnant = this.tic.verifierColonne(img1,img4,img7);
 		}
 		// deuxieme verticale
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img2,img5,img8);
+			gagnant = this.tic.verifierColonne(img2,img5,img8);
 		}
 		// troisieme verticale
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img3,img6,img9);
+			gagnant = this.tic.verifierColonne(img3,img6,img9);
 		}
 		// premiere diagonale
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img1,img5,img9);
+			gagnant = this.tic.verifierColonne(img1,img5,img9);
 		}
 		//deuxieme diagonale
 		if(gagnant < 0) {
-			gagnant = verifierColonne(img3,img5,img7);
+			gagnant = this.tic.verifierColonne(img3,img5,img7);
 		}
 		return gagnant;	
 	}
+	/*
 	private int verifierColonne(ImageView a, ImageView b, ImageView c) {
 		if(a!=null && (a.getImage() == b.getImage()) && c!=null && (b.getImage() == c.getImage())){
             if(a.getImage() == imageO) return 0;
@@ -191,14 +193,14 @@ public class TicTacToeControleur {
             return -1;
         }
         return -1;
-	}
+	}*/
 public void Quitter() {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
 		stage.close();
+		new Client().start(new Stage());
 	}
-public void Redemarrer() {
-	
-	
+public void Redemarrer() throws RemoteException {
+	//fin = tic.redemarrer();
 	initialize();
 	
 }
