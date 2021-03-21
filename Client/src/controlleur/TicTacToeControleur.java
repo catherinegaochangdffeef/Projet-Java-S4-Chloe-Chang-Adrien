@@ -92,8 +92,7 @@ public class TicTacToeControleur {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
 		if(!fin) {
-		
-			if(temp == null) {
+			if(temp == null) 
 				if(tour) img.setImage(imageX);
 				else img.setImage(imageO);
 				endTour();
@@ -107,7 +106,7 @@ public class TicTacToeControleur {
 			}	
 		}
 		
-	}
+	
 	public boolean isTour() {
 		return tour;
 	}
