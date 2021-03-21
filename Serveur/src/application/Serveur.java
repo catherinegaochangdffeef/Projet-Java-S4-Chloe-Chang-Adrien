@@ -13,7 +13,7 @@ public class Serveur {
 	public static void main(String[] args) {
 		try {
 			String hote = "127.0.0.1";
-			int port = Integer.parseInt("6003");
+			int port = Integer.parseInt("6002");
 			// createRegistry permet de lancer le rmiregistry sur le port indiqué
 			LocateRegistry.createRegistry(port);
 			AllumetteImpl allumette = new AllumetteImpl();

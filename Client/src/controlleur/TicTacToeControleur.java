@@ -76,12 +76,11 @@ public class TicTacToeControleur {
 				tour_lb.setText("c'est le tour de: ");
 			 
 			 String hote = "127.0.0.1";
-				int port = Integer.parseInt("6003");
+				int port = Integer.parseInt("6002");
 				tic = (TicTacToeInterface) Naming.lookup("rmi://" + hote + ":" + port + "/tictactoe");
 			imageO = new Image(TicTacToeControleur.class.getResource("/vue/O.png").toString());
 	        imageX = new Image(TicTacToeControleur.class.getResource("/vue/X.png").toString());
 	        btn_rec.setVisible(false);
-	        
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println("Erreur lookup" + e);
@@ -92,12 +91,13 @@ public class TicTacToeControleur {
 	public void imageClique(MouseEvent event) throws RemoteException {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
-		if(!this.tic.finMorpion()) {
+		if(!fin) {
+		
 			if(temp == null) {
 				if(tour) img.setImage(imageX);
 				else img.setImage(imageO);
 				endTour();
-				if(!this.tic.finMorpion()) {
+				if(!fin) {
 				tour=!tour;
 				signe=!signe;
 				if (signe) signe_lb.setText("X");
@@ -135,11 +135,7 @@ public class TicTacToeControleur {
 	//fonction qui permets de affihcer la gagnant et permet de recommencer le jeu 
 	public void finJeu(int gagnant) throws RemoteException  {
 		String gagne = "Le gagnant est: ";
-		//int i=tic.finJeu(gagnant);
-		//if( gagnant ==0) signe_lb.setText("O");
-		//else signe_lb.setText("X");
 		signe_lb.setText(this.tic.finJeu(gagnant));
-		//fin=tic.retournerFinJeu();
 		fin = true;
 		tour_lb.setText(gagne);
 		btn_rec.setVisible(true);
@@ -150,42 +146,42 @@ public class TicTacToeControleur {
 	// 1 - X gagne
 	public int verifierGagnant() throws RemoteException {
 		// premier horizontal
-		int gagnant = this.tic.verifierColonne(img1,img2,img3);
+		int gagnant = verifierColonne(img1,img2,img3);
 		
 		// deuxieme horizontal
 		if(gagnant<0) {
-			gagnant = this.tic.verifierColonne(img4,img5,img6);
+			gagnant = verifierColonne(img4,img5,img6);
 			
 		}
 		//troisieme horizontal
 		if(gagnant < 0) {
-			gagnant =this.tic. verifierColonne(img7,img8,img9);
+			gagnant =verifierColonne(img7,img8,img9);
 		}
 		
 		// premiere verticale
 		if(gagnant < 0) {
-			gagnant = this.tic.verifierColonne(img1,img4,img7);
+			gagnant = verifierColonne(img1,img4,img7);
 		}
 		// deuxieme verticale
 		if(gagnant < 0) {
-			gagnant = this.tic.verifierColonne(img2,img5,img8);
+			gagnant = verifierColonne(img2,img5,img8);
 		}
 		// troisieme verticale
 		if(gagnant < 0) {
-			gagnant = this.tic.verifierColonne(img3,img6,img9);
+			gagnant =verifierColonne(img3,img6,img9);
 		}
 		// premiere diagonale
 		if(gagnant < 0) {
-			gagnant = this.tic.verifierColonne(img1,img5,img9);
+			gagnant = verifierColonne(img1,img5,img9);
 		}
 		//deuxieme diagonale
 		if(gagnant < 0) {
-			gagnant = this.tic.verifierColonne(img3,img5,img7);
+			gagnant = verifierColonne(img3,img5,img7);
 		}
 		return gagnant;	
 	}
-	/*
-	private int verifierColonne(ImageView a, ImageView b, ImageView c) {
+	
+	private int verifierColonne(ImageView a, ImageView b, ImageView c) throws RemoteException {
 		if(a!=null && (a.getImage() == b.getImage()) && c!=null && (b.getImage() == c.getImage())){
             if(a.getImage() == imageO) return 0;
             else if(a.getImage() == imageX) return 1;
@@ -193,7 +189,7 @@ public class TicTacToeControleur {
             return -1;
         }
         return -1;
-	}*/
+	}
 public void Quitter() {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
 		stage.close();
