@@ -21,7 +21,7 @@ public class TicTacToeControleur {
 	private int tourCompteur = 0;
 
 	private boolean tour = true;
-	private boolean signe = false; // X - true, O - false
+	private boolean signe = true; // X - true, O - false
 	private boolean fin = false;
 	TicTacToeInterface tic;// cette variable permettre d'utiliser les fonctions implementees du cote serveur
 	
@@ -69,8 +69,10 @@ public class TicTacToeControleur {
 				img2.setImage(null);
 				img1.setImage(null);
 				fin =false;
-				tour_lb.setText(null);
-				signe_lb.setText(null);
+				signe = true;
+				tour = true;
+				signe_lb.setText("X");
+				tour_lb.setText("c'est le tour de: ");
 			 
 			 String hote = "127.0.0.1";
 				int port = Integer.parseInt("6002");
@@ -78,15 +80,14 @@ public class TicTacToeControleur {
 			imageO = new Image(TicTacToeControleur.class.getResource("/vue/O.png").toString());
 	        imageX = new Image(TicTacToeControleur.class.getResource("/vue/X.png").toString());
 	        btn_rec.setVisible(false);
-	        if (signe) signe_lb.setText("X");
-	        else signe_lb.setText("O");
+	        
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println("Erreur lookup" + e);
 			}
 	        
 	    } 
-	 
+	
 	public void imageClique(MouseEvent event) {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
@@ -95,10 +96,13 @@ public class TicTacToeControleur {
 				if(tour) img.setImage(imageX);
 				else img.setImage(imageO);
 				endTour();
+				if(!fin) {
 				tour=!tour;
 				signe=!signe;
-				if (signe) signe_lb.setText("O");
-		        else signe_lb.setText("X");
+				if (signe) signe_lb.setText("X");
+		        else signe_lb.setText("O");
+				}
+				
 			}	
 		}
 		
@@ -114,7 +118,7 @@ public class TicTacToeControleur {
 		return signe;
 	}
 	public void endTour() {
-		tour_lb.setText("c'est au tour de l'adversaire !");
+		tour_lb.setText("c'est le tour de: ");
 		++tourCompteur;
 		if(tourCompteur >=5) {
 			int gagnant = verifierGagnant();
@@ -127,18 +131,18 @@ public class TicTacToeControleur {
 		
 	}
 	public void startTour() {
-		tour_lb.setText("C'est ton tour !");
+		tour_lb.setText("C'est le tour de : ");
 		
 	}
-	
+	//fonction qui permets de affihcer la gagnant et permet de recommencer le jeu 
 	public void finJeu(int gagnant) {
 		String gagne = "Le gagnant est: ";
-		if(gagnant == 0) gagne +="O";
-		else gagne += "X";
-	
+		if(gagnant == 0) signe_lb.setText("O");
+		else signe_lb.setText("X");
+		fin =true;
 		tour_lb.setText(gagne);
-		 btn_rec.setVisible(true);
-		 fin =true;
+		btn_rec.setVisible(true);
+		
 	}
 	// -1 pas de gagnant
 	// 0 - O gagne
