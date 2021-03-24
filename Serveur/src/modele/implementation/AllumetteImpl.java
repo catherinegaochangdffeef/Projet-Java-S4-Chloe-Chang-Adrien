@@ -9,6 +9,7 @@ import modele.interfaceRMI.AllumetteInterface;
 public class AllumetteImpl extends UnicastRemoteObject implements AllumetteInterface {
 
 	int idAllumette;
+	boolean bool;
 	ArrayList<Integer> arrayAllumettes;
 	
 	public AllumetteImpl() throws RemoteException {
@@ -23,6 +24,16 @@ public class AllumetteImpl extends UnicastRemoteObject implements AllumetteInter
 	
 	public void retirerAllumettes(int nbAllumettes, int idPartie) throws RemoteException {
 		arrayAllumettes.set(idPartie,(arrayAllumettes.get(idPartie)-nbAllumettes));
+	}
+	
+	public boolean partieTerminee(int idPartie) throws RemoteException {
+		if (getNbAllumettes(idPartie) == 0) {
+			bool = true;
+		}
+		else {
+			bool = false;
+		}
+		return bool;
 	}
 	
 	public int newAllumette() throws RemoteException {

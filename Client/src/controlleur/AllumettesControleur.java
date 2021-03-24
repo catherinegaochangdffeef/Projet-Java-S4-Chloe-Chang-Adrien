@@ -107,7 +107,7 @@ public class AllumettesControleur {
 		afficherAllumettes();
 		lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
 		// s'il n'y a plus d'allumettes, on arrete la partie
-		if (allu.getNbAllumettes(idAllumette) == 0) {
+		if (allu.partieTerminee(idAllumette) == true) {
 			finPartie();
 		}
 		// sinon c'est a l'ordinateur de jouer
@@ -123,7 +123,7 @@ public class AllumettesControleur {
 		afficherAllumettes();
 		lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
 		// s'il n'y a plus d'allumettes, on arrete la partie
-		if (allu.getNbAllumettes(idAllumette) == 0) {
+		if (allu.partieTerminee(idAllumette) == true) {
 			finPartie();
 		}
 		// sinon c'est a l'ordinateur de jouer
@@ -151,7 +151,7 @@ public class AllumettesControleur {
 				nbAllumettesIA += 1;
 				afficherAllumettes();
 				lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
-				if (allu.getNbAllumettes(idAllumette) == 0) {
+				if (allu.partieTerminee(idAllumette) == true) {
 					finPartie();
 				}
 				else if (allu.getNbAllumettes(idAllumette) == 1) {
@@ -163,7 +163,7 @@ public class AllumettesControleur {
 				nbAllumettesIA += 2;
 				afficherAllumettes();
 				lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
-				if (allu.getNbAllumettes(idAllumette) == 0) {
+				if (allu.partieTerminee(idAllumette) == true) {
 					finPartie();
 				}
 				else if (allu.getNbAllumettes(idAllumette) == 1) {

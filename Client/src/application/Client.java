@@ -12,7 +12,7 @@ public class Client extends Application {
 	public void start(Stage primaryStage){
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/vue/FenetreAccueil.fxml"));
-			Scene scene = new Scene((VBox) root, 600, 400);		
+			Scene scene = new Scene((VBox) root, 700, 500);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Serveur de jeux en réseau");
 			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/vue/img_accueil.jpg")));
