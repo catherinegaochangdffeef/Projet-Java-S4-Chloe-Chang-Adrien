@@ -47,7 +47,7 @@ public class PenduControleur implements Initializable {
 	public void initialize(URL location, ResourceBundle ressources) {
 		try {
 			String hote = "127.0.0.1";
-			int port = Integer.parseInt("6002");
+			int port = Integer.parseInt("6005");
 			pendu = (PenduInterface) Naming.lookup("rmi://" + hote + ":" + port + "/pendu");
 		}
 		catch (Exception e) {

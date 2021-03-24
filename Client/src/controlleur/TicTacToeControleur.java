@@ -17,13 +17,15 @@ import vue.VueTicTacToe;
 import javafx.scene.image.Image;
 
 public class TicTacToeControleur {
-	private Image imageX;
-	private Image imageO;
-	private int tourCompteur = 0;
+	public Image imageX;
+	public Image imageO;
 
-	private boolean tour = true;
-	private boolean signe = true; // X - true, O - false
-	private boolean fin = false;
+	
+	public int tourCompteur = 0;
+
+	public boolean tour = true;
+	public  boolean signe = true; // X - true, O - false
+	public boolean fin = false;
 	TicTacToeInterface tic;// cette variable permettre d'utiliser les fonctions implementees du cote serveur
 	
 	
@@ -76,7 +78,7 @@ public class TicTacToeControleur {
 				tour_lb.setText("c'est le tour de: ");
 			 
 			 String hote = "127.0.0.1";
-				int port = Integer.parseInt("6002");
+				int port = Integer.parseInt("6005");
 				tic = (TicTacToeInterface) Naming.lookup("rmi://" + hote + ":" + port + "/tictactoe");
 			imageO = new Image(TicTacToeControleur.class.getResource("/vue/O.png").toString());
 	        imageX = new Image(TicTacToeControleur.class.getResource("/vue/X.png").toString());
@@ -92,15 +94,24 @@ public class TicTacToeControleur {
 		ImageView img = (ImageView) event.getSource();
 		Image temp = img.getImage();
 		if(!fin) {
+		//if(!tic.finMorpion()) {
 			if(temp == null) 
-				if(tour) img.setImage(imageX);
-				else img.setImage(imageO);
+				//if(tour) img.setImage(imageX);
+				//else img.setImage(imageO);
+				if (tic.setImage(tour)) img.setImage(imageX);
+			    else img.setImage(imageO);
+				//img.setImage(tic.setImage(tour, imageX, imageO));
 				endTour();
 				if(!fin) {
-				tour=!tour;
-				signe=!signe;
-				if (signe) signe_lb.setText("X");
-		        else signe_lb.setText("O");
+				//if(!tic.finMorpion()) {
+				//tour=!tour;
+					tour=tic.changerTour(tour);
+				//signe=!signe;
+					signe=tic.changerSigne(signe);
+				//if (signe) signe_lb.setText("X");
+		        //else signe_lb.setText("O");
+					// si signe est true, afficher "X", sinon afficher "O"
+					signe_lb.setText(tic.afficherSigne(signe));
 				}
 				
 			}	
@@ -119,6 +130,7 @@ public class TicTacToeControleur {
 	public void endTour() throws RemoteException {
 		tour_lb.setText("c'est le tour de: ");
 		++tourCompteur;
+		
 		if(tourCompteur >=5) {
 			int gagnant = verifierGagnant();
 			if(gagnant >=0) {
@@ -135,7 +147,8 @@ public class TicTacToeControleur {
 	public void finJeu(int gagnant) throws RemoteException  {
 		String gagne = "Le gagnant est: ";
 		signe_lb.setText(this.tic.finJeu(gagnant));
-		fin = true;
+		//fin = true;
+		fin= tic.finMorpion(gagnant);
 		tour_lb.setText(gagne);
 		btn_rec.setVisible(true);
 		

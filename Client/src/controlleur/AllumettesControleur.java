@@ -54,7 +54,7 @@ public class AllumettesControleur {
 	public void initialize() throws RemoteException {
 		try {
 			String hote = "127.0.0.1";
-			int port = Integer.parseInt("6002");
+			int port = Integer.parseInt("6005");
 			allu = (AllumetteInterface) Naming.lookup("rmi://" + hote + ":" + port + "/allumette");
 			idAllumette = allu.newAllumette();
 		}
