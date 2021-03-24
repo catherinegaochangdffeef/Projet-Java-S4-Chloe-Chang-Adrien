@@ -23,6 +23,8 @@ public class PenduControleur implements Initializable {
 	String mot;
 	PenduInterface pendu;
 	UUID numPartie;
+	// le booléen recommence permet de dire quand il faut supprimer l'ancien id de partie
+	boolean recommence = false;
 	@FXML private Label vies_restantes;
 	@FXML private Label motcache;
 	@FXML private Label lbl_vies;
@@ -37,7 +39,7 @@ public class PenduControleur implements Initializable {
 	@FXML private Button btn_quitter;
 	@FXML private Button commencer;
 
-	// le pendu
+	// le pendu sous forme d'un canvas
 	@FXML private Canvas canvas;
 	GraphicsContext gc;
 
@@ -54,6 +56,12 @@ public class PenduControleur implements Initializable {
 	}
 
 	public void DebutJeu() throws RemoteException {
+		// si on recommence la partie, on efface l'ancienne partie avant de lui en ré-attribuer une nouvelle
+		if (recommence == true) {
+			pendu.Effacer(numPartie);
+			recommence = false;
+		}
+		// la partie récupère un id unique qui est cree dans le serveur
 		numPartie = pendu.creerPartie();
 		mot = pendu.ChoixMot(numPartie);
 		motcache.setText(pendu.AfficheTirets(mot));
@@ -74,9 +82,11 @@ public class PenduControleur implements Initializable {
 		vies_restantes.setText(String.valueOf(11));
 		lbl_lettres_jouees.setText("");
 
-		// remise invisible du pendu
+		
 		GraphicsContext gc = canvas.getGraphicsContext2D();
+		// on efface le canvas
 		gc.clearRect(0, 0, 150, 150);
+		// on dessine en blanc les traits du pendu
 		gc.setStroke(Color.WHITE);
 		gc.setLineWidth(2);
 		gc.strokeLine(20,140,130,140);
@@ -92,13 +102,16 @@ public class PenduControleur implements Initializable {
 		gc.strokeLine(105,98,105,120);
 	}
 
+	// lors de la validation sur le bouton ou avec la touche entrée dans la zone de saisie
 	public void Envoie_Lettre() throws RemoteException {
 		char c = 0;
 		try {
 			c = saisieLettre.getText().trim().toUpperCase().charAt(0);
 			// le regex pour autoriser une seule lettre est  [A-Z]{1,1}
 			if (Pattern.matches("[A-Z]{1,1}", saisieLettre.getText().trim().toUpperCase())) {
+				// si la lettre n'est pas déjà utilisée
 				if (LettreUtilisee(c) == false) {
+					// si le caractère demandé est dans le mot
 					if (pendu.RechCharactere(c,mot) == true) {
 						motcache.setText(pendu.AfficheLettres(c,numPartie));
 						lbl_erreur_lettre.setText("");
@@ -124,6 +137,7 @@ public class PenduControleur implements Initializable {
 		saisieLettre.requestFocus();
 	}
 
+	// permet de dessiner le pendu en fonction du nombre d'erreur
 	private void DessinePendu(int nb) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setLineWidth(2);
@@ -195,7 +209,8 @@ public class PenduControleur implements Initializable {
 			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver etait : " + mot);
 		}
 	}
-
+	
+	// permet de faire l'affichage commun (peu importe si il y a victoire ou defaite, on aura toujours ceci)
 	private void CommunFinJeu() {
 		lbl_lettres_saisies.setVisible(false);
 		saisieLettre.setDisable(true);
@@ -204,6 +219,8 @@ public class PenduControleur implements Initializable {
 		saisieLettre.setVisible(false);
 		lbl_saisie.setVisible(false);
 		btn_valid.setVisible(false);
+		recommence = true;
+		// on change juste le titre du bouton de départ pour pouvoir relancer une partie
 		commencer.setText("Recommencer");	
 	}
 
