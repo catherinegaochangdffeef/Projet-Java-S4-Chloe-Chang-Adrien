@@ -113,7 +113,7 @@ public class PenduControleur implements Initializable {
 						Finjeu(Integer.valueOf(vies_restantes.getText()));
 					}
 				}
-				else lbl_erreur_lettre.setText("La lettre a déjà été utilisée !");
+				else lbl_erreur_lettre.setText("La lettre a deja ete utilisee !");
 			}
 			else lbl_erreur_lettre.setText("Une seule lettre est attendue !");
 		} catch(Exception e) {
@@ -185,14 +185,14 @@ public class PenduControleur implements Initializable {
 
 	private void Finjeu(int erreur) {
 		if (motcache.getText().indexOf('_') == -1) {
-			// on a gagné
+			// on a gagne
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Bravo ! Vous avez gagné avec " + String.valueOf(11-erreur) + " erreurs !");
+			lbl_lettres_jouees.setText("Bravo ! Vous avez gagne avec " + String.valueOf(11-erreur) + " erreurs !");
 		}
 		else if (erreur <= 0) {
 			// on a perdu
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver était : " + mot);
+			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver etait : " + mot);
 		}
 	}
 
@@ -207,8 +207,9 @@ public class PenduControleur implements Initializable {
 		commencer.setText("Recommencer");	
 	}
 
-	public void Quitter () {
+	public void Quitter () throws RemoteException {
 		Stage stage=(Stage) btn_quitter.getScene().getWindow();
+		pendu.Effacer(numPartie);
 		stage.close();
 		new Client().start(new Stage());
 	}

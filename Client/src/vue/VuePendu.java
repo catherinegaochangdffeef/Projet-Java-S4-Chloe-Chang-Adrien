@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage; 
 
@@ -15,7 +16,8 @@ public class VuePendu  extends Application{
 			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("vue/FenetrePendu.fxml"));
 			Scene scene = new Scene((AnchorPane) root, 700,500);		
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Pendu");
+			primaryStage.setTitle("Le Pendu !");
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("img_pendu.jpg")));
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

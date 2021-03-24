@@ -7,13 +7,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import modele.interfaceRMI.AccueilInterface;
 import vue.VueAllumettes;
 import vue.VuePendu;
 import vue.VueTicTacToe;
 
 
-public class AccueilControleur implements AccueilInterface  {
+public class AccueilControleur {
 	@FXML
 	private Button ButtonPendu;
 	@FXML

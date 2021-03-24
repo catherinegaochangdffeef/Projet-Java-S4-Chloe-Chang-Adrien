@@ -3,8 +3,6 @@ package application;
 
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
-
-import modele.implementation.AccueilImpl;
 import modele.implementation.AllumetteImpl;
 import modele.implementation.Pendu;
 import modele.implementation.TicTacToeImpl;

@@ -82,14 +82,6 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 		bob.setMotcache(motcache);
 		return motcache;
 	}
-	public char[] ecritLettres(String mot, char c) throws RemoteException {
-		char[] motDecompose = mot.toCharArray(); 
-		for (int i=0; i<mot.length(); i++) {
-			if (c == mot.charAt(i)) motDecompose[i] = c; 
-			else motDecompose[i] = '_'; 
-		}
-		return motDecompose; 
-	}
 
 	@Override
 	public int ErreurLettre(UUID id) throws RemoteException {
@@ -97,6 +89,10 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 		nb_erreur = p.getNb_erreur()-1;
 		p.setNb_erreur(nb_erreur);
 		return nb_erreur;
+	}
+	public void Effacer(UUID id) throws RemoteException {
+		tableauPendu.remove(id);
+		System.out.println(tableauPendu);
 	}
 
 	public int getNb_erreur() {
