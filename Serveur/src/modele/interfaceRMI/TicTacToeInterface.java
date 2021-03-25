@@ -15,5 +15,5 @@ public interface TicTacToeInterface  extends Remote{
 	public abstract boolean changerTour(boolean tour) throws RemoteException;
 	public abstract boolean changerSigne(boolean signe) throws RemoteException;
 	public abstract boolean finMorpion(int gagnant) throws RemoteException;
-	
+
 }

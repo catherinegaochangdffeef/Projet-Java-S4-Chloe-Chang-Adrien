@@ -17,7 +17,7 @@ public class Client extends Application {
 			primaryStage.setTitle("Serveur de jeux en réseau");
 			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/vue/img_accueil.jpg")));
 			primaryStage.show();
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

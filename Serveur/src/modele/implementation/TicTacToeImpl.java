@@ -8,7 +8,7 @@ import modele.interfaceRMI.TicTacToeInterface;
 public class TicTacToeImpl extends UnicastRemoteObject implements TicTacToeInterface{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	boolean finMorpion;
 	boolean tour;
 	public Image imageX;
@@ -21,18 +21,18 @@ public class TicTacToeImpl extends UnicastRemoteObject implements TicTacToeInter
 	public void demarrerMorpion() throws RemoteException{ 
 		this.finMorpion = false;
 	}
-	
+
 	/*public boolean finMorpion() throws RemoteException{ 
 		this.finMorpion=true;
 		this.finMorpion= false;
 		return false;
 	}
-	*/
+	 */
 	public boolean setImage(boolean tour) throws RemoteException{
 		if(tour) return true;
 		else return false;
 	}
-	
+
 	/*public Image setImage(boolean tour,Image imageX,Image imageO) throws RemoteException{
 		if(tour) return imageX;
 		else return imageO;
@@ -54,7 +54,7 @@ public class TicTacToeImpl extends UnicastRemoteObject implements TicTacToeInter
 	public boolean changerSigne(boolean signe) throws RemoteException{
 		return (!signe);
 	}
-	
+
 	public String finJeu(int gagnant) throws RemoteException{
 		String signe=null;
 		if(gagnant ==0) signe="O";

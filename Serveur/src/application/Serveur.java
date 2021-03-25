@@ -15,11 +15,11 @@ public class Serveur {
 			// createRegistry permet de lancer le rmiregistry sur le port indiqué
 			LocateRegistry.createRegistry(port);
 			AllumetteImpl allumette = new AllumetteImpl();
-            Naming.rebind("rmi://"+ hote +":"+port+ "/allumette", allumette);
-            Naming.rebind("rmi://"+ hote +":"+port+ "/pendu", new Pendu());
-            Naming.rebind("rmi://"+ hote +":"+port+ "/tictactoe", new TicTacToeImpl());
+			Naming.rebind("rmi://"+ hote +":"+port+ "/allumette", allumette);
+			Naming.rebind("rmi://"+ hote +":"+port+ "/pendu", new Pendu());
+			Naming.rebind("rmi://"+ hote +":"+port+ "/tictactoe", new TicTacToeImpl());
 			System.out.println ("Serveur prêt ! .");
-		
+
 		} catch (Exception e) {
 			System.out.println ("Serveur échec " + e);
 		}

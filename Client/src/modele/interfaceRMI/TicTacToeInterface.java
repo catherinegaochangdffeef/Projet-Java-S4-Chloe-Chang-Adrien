@@ -10,10 +10,10 @@ public interface TicTacToeInterface  extends Remote{
 	//public abstract boolean finMorpion() throws RemoteException;
 	public abstract boolean setImage( boolean tour) throws RemoteException;
 	public abstract String afficherSigne(boolean signe) throws RemoteException;
-	
+
 	//public abstract Image setImage( boolean tour,Image imageX, Image imageO) throws RemoteException;
 	public abstract boolean changerTour(boolean tour) throws RemoteException;
 	public abstract boolean changerSigne(boolean signe) throws RemoteException;
 	public abstract boolean finMorpion(int gagnant) throws RemoteException;
-	
+
 }
