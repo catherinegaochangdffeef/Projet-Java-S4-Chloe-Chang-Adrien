@@ -61,9 +61,7 @@ public class AllumettesControleur {
 		catch (Exception e) {
 			System.out.println("Erreur lookup: " + e);
 		}
-
-		btnRejouer.setVisible(false);
-
+		
 		// ajout des allumettes dans une array
 		listAllumettes = new ArrayList<ImageView>();
 		listAllumettes.add(allumette1);
@@ -81,6 +79,8 @@ public class AllumettesControleur {
 		listAllumettes.add(allumette13);
 		listAllumettes.add(allumette14);
 		listAllumettes.add(allumette15);
+
+		btnRejouer.setVisible(false);
 
 		// génération aléatoire d'un nombre qui détermine quel joueur commence
 		premierTour = (int) (Math.random()*range)+min;
