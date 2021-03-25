@@ -23,9 +23,9 @@ Ensuite, il vous faut lancer le `client.java` pour avoir l'interface d'accueil.
 Celle-ci vous permettera de naviguer d'un jeu à l'autre et de se connecter au serveur. Pour retourner quitter un jeu et retourner à la page précédente, vous avez un bouton `Quitter` qui vous est accessible tout au long d'une partie.
 
 <h3>:bell:Avant lancer le programme, si vous avez une erreur</h3>  
- - Ajouter Javafx dans Java Build Path  
- - Si vous avez une version différente de JavaFx 8 il vous faut :  
-Ajouter la ligne suivante dans le `Run configuration -> Argument` pour le fichier client.java 
+Ajouter Javafx dans Java Build Path    
+
+Si vous avez une version différente de JavaFx 8 il vous faut ajouter la ligne suivante dans le `Run configuration -> Argument` pour le fichier client.java 
 
 
 `--module-path "\path to javafx\lib" --add-modules javafx.controls,javafx.fxml`  
