@@ -24,19 +24,20 @@ public class PenduControleur implements Initializable {
 	String mot;
 	PenduInterface pendu;
 	UUID numPartie;
-	// choix du theme mis � -1
+	// choix du theme mis à -1
 	int choix = -1;
-	// le bool�en recommence permet de dire quand il faut supprimer l'ancien id de partie
+	// le booléen 'recommence' permet de dire quand il faut supprimer l'ancien id de partie
 	boolean recommence = false;
 	@FXML private Label vies_restantes;
 	@FXML private Label motcache;
 	@FXML private Label lbl_vies;
 	@FXML private Label lbl_saisie;
-	// label indiquant ou sont les lettres deja jouees
+	// label indiquant ou sont les lettres deja jouées
 	@FXML private Label lbl_lettres_saisies;
-	// lettres qui ont ete jouees
+	// lettres qui ont ete jouées
 	@FXML private Label lbl_lettres_jouees;
 	@FXML private Label lbl_erreur_lettre;
+	@FXML private Label lbl_choix;
 	@FXML private TextField saisieLettre;
 	@FXML private Button btn_valid;
 	@FXML private Button btn_quitter;
@@ -58,18 +59,18 @@ public class PenduControleur implements Initializable {
 		catch (Exception e) {
 			System.out.println("Erreur lookup" + e);
 		}
-		this.cbx_choix_theme.getItems().addAll("Aleatoire","Minecraft","Geologie","Espace");
+		this.cbx_choix_theme.getItems().addAll("Aléatoire","Minecraft","Géologie","Espace");
 		commencer.setDisable(true);
 	}
 
 
 	public void DebutJeu() throws RemoteException {
-		// si on recommence la partie, on efface l'ancienne partie avant de lui en r�-attribuer une nouvelle
+		// si on recommence la partie, on efface l'ancienne partie avant de lui en ré-attribuer une nouvelle
 		if (recommence == true) {
 			pendu.Effacer(numPartie);
 			recommence = false;
 		}
-		// la partie r�cup�re un id unique qui est cree dans le serveur
+		// la partie récupère un id unique qui est crée dans le serveur
 		numPartie = pendu.creerPartie(choix);
 		mot = pendu.ChoixMot(numPartie);
 		motcache.setText(pendu.AfficheTirets(mot));
@@ -113,24 +114,27 @@ public class PenduControleur implements Initializable {
 	}
 
 	public void ChoixTheme() {
+		// pour le début, on attend une sélection de thème
 		while (choix == -1) {
 			choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
 		}
+		
 		this.choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
 		cbx_choix_theme.setPromptText(cbx_choix_theme.getSelectionModel().getSelectedItem());
 		commencer.setDisable(false);
+		lbl_choix.setVisible(false);
 	}
 
-	// lors de la validation sur le bouton ou avec la touche entr�e dans la zone de saisie
+	// lors de la validation sur le bouton ou avec la touche entrée dans la zone de saisie
 	public void Envoie_Lettre() throws RemoteException {
 		char c = 0;
 		try {
 			c = saisieLettre.getText().trim().toUpperCase().charAt(0);
 			// le regex pour autoriser une seule lettre est  [A-Z]{1,1}
 			if (Pattern.matches("[A-Z]{1,1}", saisieLettre.getText().trim().toUpperCase())) {
-				// si la lettre n'est pas d�j� utilis�e
+				// si la lettre n'est pas déjà utilisée
 				if (LettreUtilisee(c) == false) {
-					// si le caract�re demand� est dans le mot
+					// si le caractère demandé est dans le mot
 					if (pendu.RechCharactere(c,mot) == true) {
 						motcache.setText(pendu.AfficheLettres(c,numPartie));
 						lbl_erreur_lettre.setText("");
@@ -145,7 +149,7 @@ public class PenduControleur implements Initializable {
 						Finjeu(Integer.valueOf(vies_restantes.getText()));
 					}
 				}
-				else lbl_erreur_lettre.setText("La lettre a deja ete utilisee !");
+				else lbl_erreur_lettre.setText("La lettre a deja été utilisée !");
 			}
 			else lbl_erreur_lettre.setText("Une seule lettre est attendue !");
 		} catch(Exception e) {
@@ -210,7 +214,7 @@ public class PenduControleur implements Initializable {
 	}
 
 	public boolean LettreUtilisee (char c) {
-		// retourne -1 si le charactere est pas contenu
+		// retourne -1 si le caractère est pas contenu
 		if (lbl_lettres_jouees.getText().indexOf(c) == -1)
 			return false;
 		else return true;
@@ -218,14 +222,20 @@ public class PenduControleur implements Initializable {
 
 	private void Finjeu(int erreur) {
 		if (motcache.getText().indexOf('_') == -1) {
-			// on a gagne
+			// on a gagné
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Bravo ! Vous avez gagne avec " + String.valueOf(11-erreur) + " erreurs !");
+			String lbl="";
+			if (11-erreur == 0)
+				lbl = "acune erreur !";
+			else if (11-erreur == 1)
+				lbl = String.valueOf(11-erreur)+ " erreur";
+			else lbl = String.valueOf(11-erreur) + " erreurs";
+			lbl_lettres_jouees.setText("Bravo ! Vous avez gagné avec " +  lbl);
 		}
 		else if (erreur <= 0) {
 			// on a perdu
 			CommunFinJeu();
-			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver etait : " + mot);
+			lbl_lettres_jouees.setText("Perdu ! Le mot à trouver était : " + mot);
 		}
 	}
 
@@ -238,10 +248,13 @@ public class PenduControleur implements Initializable {
 		saisieLettre.setVisible(false);
 		lbl_saisie.setVisible(false);
 		btn_valid.setVisible(false);
+		lbl_choix.setVisible(true);
 		cbx_choix_theme.setVisible(true);
 		recommence = true;
-		// on change juste le titre du bouton de d�part pour pouvoir relancer une partie
-		commencer.setText("Recommencer");	
+		// on change juste le titre du bouton de départ pour pouvoir relancer une partie
+		commencer.setText("Recommencer");
+		lbl_choix.setText("Vous pouvez changer de thème");
+		
 	}
 
 	public void Quitter () throws RemoteException {
