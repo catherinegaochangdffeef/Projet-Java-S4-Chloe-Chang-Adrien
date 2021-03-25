@@ -48,8 +48,8 @@ public class AllumettesControleur {
 	int range = max - min + 1;
 	int premierTour;
 
-	AllumetteInterface allu; // cette variable va permettre d'utiliser les fonctions implementees du cote serveur
-	int idAllumette; // variable qui recupere l'id des parties du jeu des allumettes
+	AllumetteInterface allu; // cette variable va permettre d'utiliser les fonctions implémentées du côté serveur
+	int idAllumette; // variable qui récupère l'id des parties du jeu des allumettes
 
 	public void initialize() throws RemoteException {
 		try {
@@ -82,15 +82,15 @@ public class AllumettesControleur {
 		listAllumettes.add(allumette14);
 		listAllumettes.add(allumette15);
 
-		// generation aleatoire d'un nombre qui determine quel joueur commence
+		// génération aléatoire d'un nombre qui détermine quel joueur commence
 		premierTour = (int) (Math.random()*range)+min;
-		// si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur realise une action
+		// si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur réalise une action
 		if (premierTour == 1) {
 			tourIA();
 		}
 	}
 
-	// fonction qui gere l'affichage des allumettes au fil du jeu
+	// fonction qui gère l'affichage des allumettes au fil du jeu
 	private void afficherAllumettes() throws RemoteException {
 		for(int i=0; i<nbAllumettesDepart; i++) {
 			listAllumettes.get(i).setVisible(false);	// on rend invisibles toutes les allumettes
@@ -100,39 +100,39 @@ public class AllumettesControleur {
 		}
 	}
 
-	// fonction qui gere le retrait d'1 allumette par le client 
+	// fonction qui gère le retrait d'1 allumette par le client 
 	public void retirerUn() throws RemoteException { 
 		allu.retirerAllumettes(1, idAllumette);
 		nbAllumettesJoueur += 1;
 		afficherAllumettes();
 		lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
-		// s'il n'y a plus d'allumettes, on arrete la partie
+		// s'il n'y a plus d'allumettes, on arrête la partie
 		if (allu.partieTerminee(idAllumette) == true) {
 			finPartie();
 		}
-		// sinon c'est a l'ordinateur de jouer
+		// sinon c'est à l'ordinateur de jouer
 		else {
 			tourIA();
 		}
 	}
 
-	// fonction qui gere le retrait de 2 allumettes par le client
+	// fonction qui gère le retrait de 2 allumettes par le client
 	public void retirerDeux() throws RemoteException {  
 		allu.retirerAllumettes(2, idAllumette);
 		nbAllumettesJoueur += 2;
 		afficherAllumettes();
 		lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
-		// s'il n'y a plus d'allumettes, on arrete la partie
+		// s'il n'y a plus d'allumettes, on arrête la partie
 		if (allu.partieTerminee(idAllumette) == true) {
 			finPartie();
 		}
-		// sinon c'est a l'ordinateur de jouer
+		// sinon c'est à l'ordinateur de jouer
 		else {
 			tourIA();
 		}
 	}
 
-	// fonction qui gere le coup de l'ordinateur
+	// fonction qui gère le coup de l'ordinateur
 	public void tourIA() throws RemoteException { 
 		// s'il ne reste qu'1 allumette, l'ordinateur la prend automatiquement
 		if (allu.getNbAllumettes(idAllumette) == 1) {
@@ -142,7 +142,7 @@ public class AllumettesControleur {
 			lblScore.setText("Joueur " + nbAllumettesJoueur + " | " + nbAllumettesIA + " Ordinateur");
 			finPartie();
 		}
-		// sinon il en prend aleatoirement 1 ou 2
+		// sinon il en prend aléatoirement 1 ou 2
 		else { 
 			int nbARetirer = (int) (Math.random()*range)+min;
 			if (nbARetirer == 1) {
@@ -172,16 +172,16 @@ public class AllumettesControleur {
 		}
 	}
 
-	// fonction qui gere la fin de la partie, celui qui a un nombre impair d'allumettes gagne
+	// fonction qui gère la fin de la partie, celui qui a un nombre impair d'allumettes gagne
 	private void finPartie() {
 		btnUn.setVisible(false);
 		btnDeux.setVisible(false);
 		btnRejouer.setVisible(true);
 		if (nbAllumettesJoueur %2 == 0) {
-			lblResultat.setText("L'ordinateur a gagn� avec un score de " + nbAllumettesIA + " allumettes.");
+			lblResultat.setText("L'ordinateur a gagné avec un score de " + nbAllumettesIA + " allumettes.");
 		}
 		else {
-			lblResultat.setText("Vous avez gagn� avec un score de " + nbAllumettesJoueur + " allumettes.");
+			lblResultat.setText("Vous avez gagné avec un score de " + nbAllumettesJoueur + " allumettes.");
 		}
 	}
 
@@ -196,15 +196,15 @@ public class AllumettesControleur {
 		btnUn.setVisible(true);
 		btnDeux.setVisible(true);
 		btnRejouer.setVisible(false);
-		// generation aleatoire d'un nombre qui determine quel joueur commence
+		// génération aléatoire d'un nombre qui détermine quel joueur commence
 		premierTour = (int) (Math.random()*range)+min;
-		// si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur realise une action
+		// si c'est 1, l'ordinateur commence, sinon le programme attend que le joueur réalise une action
 		if (premierTour == 1) {
 			tourIA();
 		}
 	}
 
-	// fonction qui permet de quitter la fenetre de jeu et de revenir sur la fenetre d'accueil
+	// fonction qui permet de quitter la fenêtre de jeu et de revenir sur la fenêtre d'accueil
 	public void Quitter() {
 		Stage stage=(Stage) btnQuitter.getScene().getWindow();
 		stage.close();
