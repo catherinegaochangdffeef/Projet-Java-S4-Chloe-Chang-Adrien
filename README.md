@@ -22,7 +22,7 @@ Pour lancer l'application, il vous faut lancer le `serveur.java` en premier.
 Ensuite, il vous faut lancer le `client.java` pour avoir l'interface d'accueil.
 Celle-ci vous permettera de naviguer d'un jeu à l'autre et de se connecter au serveur. Pour retourner quitter un jeu et retourner à la page précédente, vous avez un bouton `Quitter` qui vous est accessible tout au long d'une partie.
 
-<h3>:bell:Avant lancer le programme</h3>  
+<h3>:bell:Avant lancer le programme (Juste pour Chang)</h3>  
 
 Ajouter Javafx dans Javva Build Path  
 
