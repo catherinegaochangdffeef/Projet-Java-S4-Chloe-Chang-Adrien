@@ -15,7 +15,8 @@ public interface PenduInterface extends Remote {
 	public String AfficheLettres(char c, UUID numPartie) throws RemoteException;
 	// retire un point lors d'une erreur de lettres
 	public int ErreurLettre(UUID id) throws RemoteException;
-	public UUID creerPartie() throws RemoteException;
+	// on cree une partie avec le choix du theme
+	public UUID creerPartie(int choix) throws RemoteException;
 	// permet de retirer la partie de la HashMap lorsque l'on quitte
 	public void Effacer(UUID numPartie) throws RemoteException;
 }

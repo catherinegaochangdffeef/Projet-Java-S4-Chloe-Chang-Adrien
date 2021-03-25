@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -23,6 +24,8 @@ public class PenduControleur implements Initializable {
 	String mot;
 	PenduInterface pendu;
 	UUID numPartie;
+	// choix du theme mis à -1
+	int choix = -1;
 	// le booléen recommence permet de dire quand il faut supprimer l'ancien id de partie
 	boolean recommence = false;
 	@FXML private Label vies_restantes;
@@ -39,6 +42,8 @@ public class PenduControleur implements Initializable {
 	@FXML private Button btn_quitter;
 	@FXML private Button commencer;
 
+	@FXML private ComboBox<String> cbx_choix_theme; 
+
 	// le pendu sous forme d'un canvas
 	@FXML private Canvas canvas;
 	GraphicsContext gc;
@@ -53,7 +58,10 @@ public class PenduControleur implements Initializable {
 		catch (Exception e) {
 			System.out.println("Erreur lookup" + e);
 		}
+		this.cbx_choix_theme.getItems().addAll("Aleatoire","Minecraft","Geologie","Espace");
+		commencer.setDisable(true);
 	}
+
 
 	public void DebutJeu() throws RemoteException {
 		// si on recommence la partie, on efface l'ancienne partie avant de lui en ré-attribuer une nouvelle
@@ -62,10 +70,11 @@ public class PenduControleur implements Initializable {
 			recommence = false;
 		}
 		// la partie récupère un id unique qui est cree dans le serveur
-		numPartie = pendu.creerPartie();
+		numPartie = pendu.creerPartie(choix);
 		mot = pendu.ChoixMot(numPartie);
 		motcache.setText(pendu.AfficheTirets(mot));
 		commencer.setVisible(false);
+		cbx_choix_theme.setVisible(false);
 		btn_valid.setVisible(true);
 		vies_restantes.setVisible(true);
 		motcache.setVisible(true);
@@ -76,13 +85,14 @@ public class PenduControleur implements Initializable {
 		lbl_lettres_jouees.setVisible(true);
 		lbl_erreur_lettre.setVisible(true);
 
+
 		btn_valid.setDisable(false);
 		saisieLettre.setDisable(false);
 
 		vies_restantes.setText(String.valueOf(11));
 		lbl_lettres_jouees.setText("");
 
-		
+
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		// on efface le canvas
 		gc.clearRect(0, 0, 150, 150);
@@ -100,6 +110,15 @@ public class PenduControleur implements Initializable {
 		gc.strokeLine(109, 70, 120, 90);
 		gc.strokeLine(95,98,95,120);
 		gc.strokeLine(105,98,105,120);
+	}
+
+	public void ChoixTheme() {
+		while (choix == -1) {
+			choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
+		}
+		this.choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
+		cbx_choix_theme.setPromptText(cbx_choix_theme.getSelectionModel().getSelectedItem());
+		commencer.setDisable(false);
 	}
 
 	// lors de la validation sur le bouton ou avec la touche entrée dans la zone de saisie
@@ -209,7 +228,7 @@ public class PenduControleur implements Initializable {
 			lbl_lettres_jouees.setText("Perdu ! Le mot a trouver etait : " + mot);
 		}
 	}
-	
+
 	// permet de faire l'affichage commun (peu importe si il y a victoire ou defaite, on aura toujours ceci)
 	private void CommunFinJeu() {
 		lbl_lettres_saisies.setVisible(false);
@@ -219,6 +238,7 @@ public class PenduControleur implements Initializable {
 		saisieLettre.setVisible(false);
 		lbl_saisie.setVisible(false);
 		btn_valid.setVisible(false);
+		cbx_choix_theme.setVisible(true);
 		recommence = true;
 		// on change juste le titre du bouton de départ pour pouvoir relancer une partie
 		commencer.setText("Recommencer");	

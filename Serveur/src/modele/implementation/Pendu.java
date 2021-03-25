@@ -13,16 +13,35 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	private static final long serialVersionUID = 1L;
 
 	// liste des mots du pendu
-	String[] dico = new String[]{"complexe","analyse","arc-en-ciel","depiter","cuillere","nuage",
-			"analphabete","granite","marsouin","fade","orchidee","subduction","gaz","lait",""
-					+ "table","algorithme","biscuit","parfum","volcan","arbre","sequoia","film",
-					"australopitheque","tyranosaure","haie","pique-nique","spinosaurus","licorne","archeopteryx","ornythorinque",
-					"acupuncture","appartenir","mot","boeuf","heritage","personne","constructeur","interface",
-					"trop","subliminal","vingt","note","gentil","etymologie","eclispe","logiciel","mots-cles"};
+	String[] dicoAlea = new String[]{"complexe","analyse","arc-en-ciel","depiter","cuillere","nuage",
+			"analphabete","granite","marsouin","fade","orchidee","subduction","gaz","lait",
+			"table","algorithme","biscuit","parfum","volcan","arbre","sequoia","film",
+			"australopitheque","tyranosaure","haie","pique-nique","spinosaurus","licorne","archeopteryx","ornythorinque",
+			"acupuncture","appartenir","mot","boeuf","heritage","personne","constructeur","interface",
+			"trop","subliminal","vingt","note","gentil","etymologie","eclispe","logiciel","mots-cles"
+	};
+	String[] dicoMinecraft = {
+			"quartz", "pioche", "epee", "pelle","sorciere", "hache", "houe","arc","arbalete", "diamant", "or","netherite",
+			"lapis-lazuli","boule de slime", "emeraude", "fer", "charbon", "obsidienne", "nether", "verrue du nether", "glowstone", 
+			"redstone", "donjon", "creeper", "enderman", "ghast", "trident", "établi", "coffre", "mule","coffre","escalier","verre",
+			"bois de chene","squelette", "bois de sapin","zombie", "bois de bouleau", "sable des ames","eponge", "gardien", 
+			"monument sous-marin", "enchantement", "potion", "ragout de lapin","carte", "chair putrefiee",
+			"shulker", "ender dragon","wither","diorite","granite","andesite","laine", "argile","villageois","illageois","minecart","mineshaft","elytres"
+	};
+	String[] dicoGeole = {"geologie","gabbro","granite","rhyolite","subduction","fosse oceanique","montagne"
+			,"quartz","peridot","argile","manteau","lithosphere","asthenosphere","noyau","dorsale","volcan",
+			"roche","metamorphique","sédiments","basalte","seisme","schistes","calcaire","poreux","faille"
+	};
+	String[] dicoEspace = {"planete","satellite","trou noir","espace","vide,","astre","galaxie","nebuleuse",
+			"comete","etoile","asteroide","orbite","constellation","mercure","gravite", "venus", "terre", "mars",
+			"jupiter", "saturne", "uranus", "neptune", "pluton", "soleil", "lune","trou de ver","eclipse"
+	};
 	HashMap<UUID, Pendu> tableauPendu = new HashMap<UUID,Pendu>();
 	int nb_erreur;
 	String mot;
 	String motcache;
+	// on lance la clock pour générer un nombre aléatoire
+	private static Random random = new Random(); 
 
 	// constructeurs
 	public Pendu() throws RemoteException {
@@ -37,11 +56,34 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	}
 
 	@Override
-	public UUID creerPartie() throws RemoteException {
+	public UUID creerPartie(int choix) throws RemoteException {
 		// on genere un id de parties, on choisi un mot et on stocke toute les données dans un tableau qui a pour cle l'id
 		UUID id = UUID.randomUUID();
-		int index = new Random().nextInt(dico.length);
-		String mot = dico[index].toUpperCase();
+		int index;
+		String mot ="";
+		switch (choix) {
+		case 0 : {
+			index = random.nextInt(dicoAlea.length);
+			mot = dicoAlea[index].toUpperCase();
+			break;
+		}
+		case 1 : {
+			index = random.nextInt(dicoMinecraft.length);
+			mot = dicoMinecraft[index].toUpperCase();
+			break;
+		}
+		case 2 : {
+			index = random.nextInt(dicoGeole.length);
+			mot = dicoGeole[index].toUpperCase();
+			break;
+		}
+		case 3 :{
+			index = random.nextInt(dicoEspace.length);
+			mot = dicoEspace[index].toUpperCase();
+			break;
+		}
+		}
+
 		tableauPendu.put(id, new Pendu(mot, AfficheTirets(mot), 11));
 		return id;
 	}
@@ -94,7 +136,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 		p.setNb_erreur(nb_erreur);
 		return nb_erreur;
 	}
-	
+
 	@Override
 	public void Effacer(UUID id) throws RemoteException {
 		// permet de vider la HashMap au fur et a mesure que les gens quittent et recommencent des parties
