@@ -30,10 +30,10 @@ Ajouter la ligne suivante dans le " Run configuration -> Argument" pour le fichi
 
 
  
- --module-path  "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml   
+ --module-path "\path to javafx\lib" --add-modules javafx.controls,javafx.fxml
  
  
- ici "C:\Program Files\Java\javafx-sdk-11.0.2\lib" il faut changer à votre chemin     
+ ici "path to javafx" il faut changer à votre chemin     
  ![9f1a019cd4210f12cc89a162031d746c](https://user-images.githubusercontent.com/56112613/112481932-cfb06280-8d77-11eb-8c62-95a344b26b49.png)
  
  
