@@ -132,7 +132,6 @@ public class AllumettesControleur {
 		}
 	}
 
-
 	// fonction qui gere le coup de l'ordinateur
 	public void tourIA() throws RemoteException { 
 		// s'il ne reste qu'1 allumette, l'ordinateur la prend automatiquement
@@ -172,7 +171,6 @@ public class AllumettesControleur {
 			}
 		}
 	}
-
 
 	// fonction qui gere la fin de la partie, celui qui a un nombre impair d'allumettes gagne
 	private void finPartie() {

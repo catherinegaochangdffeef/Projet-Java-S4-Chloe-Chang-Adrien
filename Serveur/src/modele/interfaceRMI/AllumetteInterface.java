@@ -16,5 +16,5 @@ public interface AllumetteInterface extends Remote{
 	public boolean partieTerminee(int idPartie) throws RemoteException;
 	
 	// fonction qui permet de generer un ID de partie et associe un nombre d'allumettes
-	int newAllumette() throws RemoteException;
+	public int newAllumette() throws RemoteException;
 }

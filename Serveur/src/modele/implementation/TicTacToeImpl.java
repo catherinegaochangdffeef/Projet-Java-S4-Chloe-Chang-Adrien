@@ -2,17 +2,15 @@ package modele.implementation;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
-
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import modele.interfaceRMI.TicTacToeInterface;
 
 public class TicTacToeImpl extends UnicastRemoteObject implements TicTacToeInterface{
 
+	private static final long serialVersionUID = 1L;
 	
-	private boolean finMorpion;
-	private boolean tour;
+	boolean finMorpion;
+	boolean tour;
 	public Image imageX;
 	public Image imageO; 
 

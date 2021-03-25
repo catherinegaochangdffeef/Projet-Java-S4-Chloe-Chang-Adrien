@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import modele.interfaceRMI.TicTacToeInterface;
-import vue.VueTicTacToe;
 import javafx.scene.image.Image;
 
 public class TicTacToeControleur {

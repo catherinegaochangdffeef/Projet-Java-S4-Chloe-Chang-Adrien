@@ -8,6 +8,8 @@ import modele.interfaceRMI.AllumetteInterface;
 
 public class AllumetteImpl extends UnicastRemoteObject implements AllumetteInterface {
 
+	private static final long serialVersionUID = 1L;
+	
 	int idAllumette;
 	boolean bool;
 	ArrayList<Integer> arrayAllumettes;
