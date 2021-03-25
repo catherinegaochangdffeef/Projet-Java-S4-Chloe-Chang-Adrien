@@ -23,14 +23,14 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	String[] dicoMinecraft = {
 			"quartz", "pioche", "epee", "pelle","sorciere", "hache", "houe","arc","arbalete", "diamant", "or","netherite",
 			"lapis-lazuli","boule de slime", "emeraude", "fer", "charbon", "obsidienne", "nether", "verrue du nether", "glowstone", 
-			"redstone", "donjon", "creeper", "enderman", "ghast", "trident", "établi", "coffre", "mule","coffre","escalier","verre",
+			"redstone", "donjon", "creeper", "enderman", "ghast", "trident", "etabli", "coffre", "mule","coffre","escalier","verre",
 			"bois de chene","squelette", "bois de sapin","zombie", "bois de bouleau", "sable des ames","eponge", "gardien", 
 			"monument sous-marin", "enchantement", "potion", "ragout de lapin","carte", "chair putrefiee",
 			"shulker", "ender dragon","wither","diorite","granite","andesite","laine", "argile","villageois","illageois","minecart","mineshaft","elytres"
 	};
 	String[] dicoGeole = {"geologie","gabbro","granite","rhyolite","subduction","fosse oceanique","montagne"
 			,"quartz","peridot","argile","manteau","lithosphere","asthenosphere","noyau","dorsale","volcan",
-			"roche","metamorphique","sédiments","basalte","seisme","schistes","calcaire","poreux","faille"
+			"roche","metamorphique","sediments","basalte","seisme","schistes","calcaire","poreux","faille"
 	};
 	String[] dicoEspace = {"planete","satellite","trou noir","espace","vide,","astre","galaxie","nebuleuse",
 			"comete","etoile","asteroide","orbite","constellation","mercure","gravite", "venus", "terre", "mars",
