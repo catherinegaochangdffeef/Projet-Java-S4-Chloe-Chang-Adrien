@@ -40,7 +40,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 	int nb_erreur;
 	String mot;
 	String motcache;
-	// on lance la clock pour générer un nombre aléatoire
+	// on lance la clock pour gÃ©nÃ©rer un nombre alÃ©atoire
 	private static Random random = new Random(); 
 
 	// constructeurs
@@ -57,7 +57,7 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public UUID creerPartie(int choix) throws RemoteException {
-		// on genere un id de parties, on choisi un mot et on stocke toute les données dans un tableau qui a pour cle l'id
+		// on genere un id de parties, on choisi un mot et on stocke toute les donnÃ©es dans un tableau qui a pour cle l'id
 		UUID id = UUID.randomUUID();
 		int index;
 		String mot ="";
@@ -90,13 +90,13 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public boolean RechCharactere(char c, String mot) {
-		// on renvoie vrai si la lettre est trouvée, sinon faux
+		// on renvoie vrai si la lettre est trouvÃ©e, sinon faux
 		return  (mot.indexOf(c) != -1);
 	}
 
 	@Override
 	public String ChoixMot(UUID id) {
-		// on recupere l'instance du pendu associé au joueur afin de lui retourner le mot
+		// on recupere l'instance du pendu associÃ©e au joueur afin de lui retourner le mot
 		Pendu p = tableauPendu.get(id);
 		return p.getMot();
 	}
@@ -113,12 +113,13 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 		for (int position = 0; position < mot.length(); position++) { 
 			if (mot.charAt(position) == c) { 
-				// on retire tout les espaces pour faire correspondre mot et motcaché (mot caché ya des espaces en plus)
+				// on retire tout les espaces pour faire correspondre mot et motcachÃ© (mot cachÃ© ya des espaces en plus)
 				motcache = motcache.replaceAll("_ ", "_"); 
 				String mot2; 				
-				// on prend tout ce qui est avant le mot trouvé, on affiche la lettre et on affiche tout ce qui vient après + 1
+				// on prend tout ce qui est avant la premiere occurence de la lettre,
+				//on affiche la lettre et on affiche tout ce qui vient aprÃ¨s + 1
 				mot2 = motcache.substring(0, position) + c + motcache.substring(position + 1); 
-				// on remplace les _ par des "_ " pour rajouter des espaces
+				// on remplace les _ par des "_ " pour remettre les espaces
 				mot2 = mot2.replaceAll("_", "_ ");
 				motcache = mot2; 
 			} 
@@ -170,6 +171,6 @@ public class Pendu extends UnicastRemoteObject implements PenduInterface {
 
 	@Override
 	public String toString() {
-		return "Le mot est : " + mot + " sous forme cachée " +motcache + " nb erreurs : " + nb_erreur + "\n";
+		return "Le mot est : " + mot + " sous forme cachï¿½e " +motcache + " nb erreurs : " + nb_erreur + "\n";
 	}
 }

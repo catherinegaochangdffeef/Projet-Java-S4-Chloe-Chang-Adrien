@@ -11,10 +11,11 @@ public interface PenduInterface extends Remote {
 	public String ChoixMot(UUID numPartie) throws RemoteException;
 	// transforme le mot choisi en liste de -
 	public String AfficheTirets(String mot) throws RemoteException;
-	// affiche une lettre dans le mot à trouver
+	// affiche une lettre dans le mot ï¿½ trouver
 	public String AfficheLettres(char c, UUID numPartie) throws RemoteException;
 	// retire un point lors d'une erreur de lettres
 	public int ErreurLettre(UUID id) throws RemoteException;
+	// on cree une partie avec le choix du theme
 	public UUID creerPartie(int choix) throws RemoteException;
 	// permet de retirer la partie de la HashMap lorsque l'on quitte
 	public void Effacer(UUID numPartie) throws RemoteException;

@@ -118,7 +118,7 @@ public class PenduControleur implements Initializable {
 		while (choix == -1) {
 			choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
 		}
-		
+		// le choix n'est plus à -1 après la premiere partie, donc on prend directement le choix précédent ou un nouveau
 		this.choix = cbx_choix_theme.getSelectionModel().getSelectedIndex();
 		cbx_choix_theme.setPromptText(cbx_choix_theme.getSelectionModel().getSelectedItem());
 		commencer.setDisable(false);
