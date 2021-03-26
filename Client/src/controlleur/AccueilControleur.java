@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import vue.VueAllumettes;
 import vue.VuePendu;
 import vue.VueTicTacToe;
+import vue.VueTicTacToe2;
 
 
 public class AccueilControleur {
@@ -39,8 +40,9 @@ public class AccueilControleur {
 		this.Quitter();
 	}
 
-	public void VersTicTacToe() {
-		new VueTicTacToe().start(new Stage());
+	public void VersTicTacToe() throws Exception {
+		//new VueTicTacToe().start(new Stage());
+		new VueTicTacToe2().start(new Stage());
 		this.Quitter();
 	}
 

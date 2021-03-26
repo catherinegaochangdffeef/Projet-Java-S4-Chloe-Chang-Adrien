@@ -1,4 +1,4 @@
-package tictactoe;
+package vue;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class VueTicTacToe2 extends Application {
     private Stage primaryStage;
     private AnchorPane layout;
 
@@ -27,7 +27,7 @@ public class Main extends Application {
     private void initialize() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Layout.fxml"));
+            loader.setLocation(VueTicTacToe2.class.getResource("FenetreTicTacToe2.fxml"));
             layout = (AnchorPane) loader.load();
             Scene scene = new Scene(layout);
             primaryStage.setScene(scene);
@@ -36,9 +36,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

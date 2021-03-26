@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ public class VueTicTacToe extends Application {
 			Scene scene = new Scene((AnchorPane) root, 700,479);		
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("TicTacToe");
+			 primaryStage.getIcons().add(new Image("https://cdn3.iconfinder.com/data/icons/games/154/game-tic-tac-toe-label-128.png"));
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
