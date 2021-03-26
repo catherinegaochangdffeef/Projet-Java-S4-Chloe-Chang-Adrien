@@ -25,7 +25,7 @@ Celle-ci vous permettera de naviguer d'un jeu à l'autre et de se connecter au s
 <h3>:bell:Avant lancer le programme, si vous avez une erreur</h3>  
 Ajouter Javafx dans Java Build Path    
 
-Si vous avez une version différente de Java 8 il vous faut ajouter la ligne suivante dans le `Run configuration -> Argument` pour le fichier client.java 
+Si vous avez une version différente de Java 8 il vous faut ajouter la ligne suivante dans : `Run configuration -> Argument` pour le fichier client.java 
 
 
 `--module-path "\path to javafx\lib" --add-modules javafx.controls,javafx.fxml`  
