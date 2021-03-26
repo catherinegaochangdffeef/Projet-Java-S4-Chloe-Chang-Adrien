@@ -14,7 +14,7 @@ public class TicTacToeClient extends UnicastRemoteObject implements ClientCallba
     Remote remoteService = null;
     private GuiCellListener guiCellListener;
 
-    protected TicTacToeClient(TextField textField) throws RemoteException {
+    public TicTacToeClient(TextField textField) throws RemoteException {
         super();
         try {
             remoteService = Naming.lookup(textField.getText());

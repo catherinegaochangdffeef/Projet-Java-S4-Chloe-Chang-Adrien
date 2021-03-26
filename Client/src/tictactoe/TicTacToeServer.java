@@ -15,7 +15,7 @@ public class TicTacToeServer extends UnicastRemoteObject implements ClientCallba
         this.guiCellListener = guiCellListener;
     }
 
-    protected TicTacToeServer() throws RemoteException {
+    public TicTacToeServer() throws RemoteException {
         Registry registry = LocateRegistry.createRegistry(1234);
         registry.rebind("LocalServer", this);
     }

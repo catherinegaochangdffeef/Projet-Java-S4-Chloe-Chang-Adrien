@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.Controller">
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.TicTacToeControleur2">
    <children>
       <Button fx:id="serverButton" layoutX="496.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleServerButton" prefHeight="29.0" prefWidth="159.0" text="Serveur" />
       <Button fx:id="clientButton" layoutX="496.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleClientButton" prefHeight="29.0" prefWidth="159.0" text="Client " />

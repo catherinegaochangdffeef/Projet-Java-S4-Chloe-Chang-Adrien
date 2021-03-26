@@ -1,4 +1,4 @@
-package tictactoe;
+package controlleur;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,12 +10,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import tictactoe.Cell;
+import tictactoe.TicTacToeClient;
+import tictactoe.TicTacToeServer;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import tictactoe.TicTacToeClient;
+import tictactoe.TicTacToeServer;
 
-public class Controller {
+
+public class TicTacToeControleur2 {
     @FXML
     private TextField textField;
     @FXML
