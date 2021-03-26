@@ -32,4 +32,5 @@ Si vous avez une version différente de JavaFx 8 il vous faut ajouter la ligne s
 il vous faut remplacer `"path to javafx\lib"` par votre chemin menant à votre JavaFx
  ![9f1a019cd4210f12cc89a162031d746c](https://user-images.githubusercontent.com/56112613/112481932-cfb06280-8d77-11eb-8c62-95a344b26b49.png)
  
- 
+<h3> Pour passer Eclispe en UTF-8 et avoir les accents :
+Window > Preferences > General > Workspace, set Text file encoding to Other : UTF-8
