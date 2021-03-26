@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import vue.VueAllumettes;
+import vue.VueMenuTicTacToe;
 import vue.VuePendu;
 import vue.VueTicTacToe;
 import vue.VueTicTacToe2;
@@ -42,7 +43,8 @@ public class AccueilControleur {
 
 	public void VersTicTacToe() throws Exception {
 		//new VueTicTacToe().start(new Stage());
-		new VueTicTacToe2().start(new Stage());
+		//new VueTicTacToe2().start(new Stage());
+		new VueMenuTicTacToe().start(new Stage());
 		this.Quitter();
 	}
 
