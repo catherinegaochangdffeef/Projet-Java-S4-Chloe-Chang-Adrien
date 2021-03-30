@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 
 
 public interface ServerInterface extends Remote {
-    void sendCell (int status, int index) throws RemoteException;
+	void envoyerCellule (int status, int index) throws RemoteException;
 }

@@ -8,12 +8,12 @@
 
 <AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlleur.TicTacToeControleur2">
    <children>
-      <Button fx:id="serverButton" layoutX="496.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleServerButton" prefHeight="29.0" prefWidth="159.0" text="Serveur" />
-      <Button fx:id="clientButton" layoutX="496.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleClientButton" prefHeight="29.0" prefWidth="159.0" text="Client " />
-      <TextField fx:id="textField" alignment="TOP_LEFT" layoutX="496.0" layoutY="124.0" prefHeight="29.0" prefWidth="149.0" text="rmi://localhost:1234/LocalServer" />
+      <Button fx:id="serveurBtn" layoutX="496.0" layoutY="14.0" mnemonicParsing="false" onAction="#cliqueServerBouton" prefHeight="29.0" prefWidth="159.0" text="Serveur" />
+      <Button fx:id="clientBtn" layoutX="496.0" layoutY="55.0" mnemonicParsing="false" onAction="#cliqueClientBouton" prefHeight="29.0" prefWidth="159.0" text="Client " />
+      <TextField fx:id="port" alignment="TOP_LEFT" layoutX="496.0" layoutY="124.0" prefHeight="29.0" prefWidth="149.0" text="rmi://localhost:1234/LocalServer" />
       <Label layoutX="496.0" layoutY="97.0" text="Port  IP:" />
-      <Label fx:id="endGame" layoutX="496.0" layoutY="212.0" text="Résultat： " />
-      <Label fx:id="whoWin" layoutX="496.0" layoutY="237.0" text="You lose ! ">
+      <Label fx:id="finJeu" layoutX="496.0" layoutY="212.0" text="Résultat： " />
+      <Label fx:id="gagnant" layoutX="496.0" layoutY="237.0" text="Perdant ! ">
          <font>
             <Font size="25.0" />
          </font>

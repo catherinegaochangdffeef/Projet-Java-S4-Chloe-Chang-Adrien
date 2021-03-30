@@ -10,39 +10,39 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class TicTacToeClient extends UnicastRemoteObject implements ClientCallbackListener {
-    Remote remoteService = null;
-    private GuiCellListener guiCellListener;
+public class TicTacToeClient extends UnicastRemoteObject implements ClientRappelerListener {
+	Remote remoteService = null;
+	public CelluleListener celluleListener;
 
-    public TicTacToeClient(TextField textField) throws RemoteException {
-        super();
-        try {
-            remoteService = Naming.lookup(textField.getText());
+	public TicTacToeClient(TextField textField) throws RemoteException {
+		super();
+		try {
+			remoteService = Naming.lookup(textField.getText());
 
-            ClientCallback callback = (ClientCallback) remoteService;
-            callback.setCellOnClientCallback(this);
-        } catch (NotBoundException | MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
+			ClientRappeler callback = (ClientRappeler) remoteService;
+			callback.setCellOnClientCallback(this);
+		} catch (NotBoundException | MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void sendToServer(int status, int index) {
-        try {
-            ServerInterface server = (ServerInterface) remoteService;
-            server.sendCell(status, index);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
+	public void envoyerAServeur(int status, int index) {
+		try {
+			ServerInterface server = (ServerInterface) remoteService;
+			server.envoyerCellule(status, index);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public void sendToClient(int status, int index) throws RemoteException {
-        if (guiCellListener != null) {
-            guiCellListener.writeCell(new Cell(this, status, index));
-        }
-    }
+	@Override
+	public void envoyerAClient(int status, int index) throws RemoteException {
+		if (celluleListener != null) {
+			celluleListener.ecrireCellule(new Cellule(this, status, index));
+		}
+	}
 
-    public void setGuiCellListener(GuiCellListener guiCellListener) {
-        this.guiCellListener = guiCellListener;
-    }
+	public void setCelluleListener(CelluleListener celluleListener) {
+		this.celluleListener = celluleListener;
+	}
 }
