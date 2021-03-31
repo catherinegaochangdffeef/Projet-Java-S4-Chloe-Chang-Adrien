@@ -3,6 +3,7 @@ package controlleur;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -38,6 +39,8 @@ public class TicTacToeMenuControleur {
 	public void Quitter() {
 		Stage stage=(Stage) quitterBtn.getScene().getWindow();
 		stage.close();
+		
 	}
+	
 	
 }

@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-
+import javafx.stage.Stage;
 import tictactoe.Cellule;
 import tictactoe.TicTacToeClient;
 import tictactoe.TicTacToeServeur;
@@ -20,12 +20,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Client;
+
 
 public class TicTacToeControleur2 {
 	@FXML
 	public TextField port;
 	@FXML
 	public Button serveurBtn;
+	@FXML
+	public Button btn_quitter;
 	@FXML
 	public Button clientBtn;
 	@FXML
@@ -207,8 +211,13 @@ public class TicTacToeControleur2 {
 		Platform.runLater(() -> {
 			finJeu.setVisible(true);
 			gagnant.setVisible(true);
-			gagnant.setText("REMIS!");
+			//gagnant.setText("REMIS!");
 		});
 		return 0;
+	}
+	public void Quitter() {
+		Stage stage=(Stage) btn_quitter.getScene().getWindow();
+		stage.close();
+		new Client().start(new Stage());
 	}
 }
