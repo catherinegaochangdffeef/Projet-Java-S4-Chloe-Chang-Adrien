@@ -16,8 +16,17 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="soloBtn" layoutX="214.0" layoutY="190.0" mnemonicParsing="false" onAction="#VersTicTacToe1" prefHeight="26.0" prefWidth="83.0" text="Solo" />
-      <Button fx:id="MulBtn" layoutX="214.0" layoutY="251.0" mnemonicParsing="false" onAction="#VersTicTacToe2" text="Multijoueur" />
-      <Button fx:id="quitterBtn" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#Quitter" text="Quitter" />
+      <Button fx:id="soloBtn" layoutX="214.0" layoutY="177.0" mnemonicParsing="false" onAction="#VersTicTacToe1" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: lightgreen;" text="Solo">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="MulBtn" layoutX="214.0" layoutY="245.0" mnemonicParsing="false" onAction="#VersTicTacToe2" prefHeight="39.0" prefWidth="110.0" style="-fx-background-color: lightgreen;" text="Multijoueur">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="quitterBtn" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#Quitter" style="-fx-background-color: blue;" text="quitter" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>
