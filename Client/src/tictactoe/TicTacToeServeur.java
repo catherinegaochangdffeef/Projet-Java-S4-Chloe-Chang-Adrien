@@ -31,7 +31,7 @@ public class TicTacToeServeur extends UnicastRemoteObject implements ClientRappe
 	}
 
 	@Override
-	public void setCellOnClientCallback (ClientRappelerListener ClientRappelerListener) throws RemoteException {
+	public void setCelluleClientRappeler (ClientRappelerListener ClientRappelerListener) throws RemoteException {
 		this.ClientRappelerListener = ClientRappelerListener;
 	}
 

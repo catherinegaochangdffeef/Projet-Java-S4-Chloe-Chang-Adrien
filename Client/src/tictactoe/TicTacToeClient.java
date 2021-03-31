@@ -20,7 +20,7 @@ public class TicTacToeClient extends UnicastRemoteObject implements ClientRappel
 			remoteService = Naming.lookup(textField.getText());
 
 			ClientRappeler clientRappeler = (ClientRappeler) remoteService;
-			clientRappeler.setCellOnClientCallback(this);
+			clientRappeler.setCelluleClientRappeler(this);
 		} catch (NotBoundException | MalformedURLException e) {
 			e.printStackTrace();
 		}
