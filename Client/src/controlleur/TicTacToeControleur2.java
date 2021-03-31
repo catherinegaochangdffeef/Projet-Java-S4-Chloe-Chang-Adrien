@@ -211,7 +211,6 @@ public class TicTacToeControleur2 {
 		Platform.runLater(() -> {
 			finJeu.setVisible(true);
 			gagnant.setVisible(true);
-			//gagnant.setText("REMIS!");
 		});
 		return 0;
 	}
